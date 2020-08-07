@@ -594,10 +594,10 @@ EXT_RETURN tls_construct_ctos_psk_kex_modes(SSL *s, WPACKET *pkt,
 #ifndef OPENSSL_NO_TLS1_3
 static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
 {
-    unsigned char *encoded_point = NULL, *classical_encoded_point = NULL, *oqs_encoded_point = NULL;
+    unsigned char *encoded_point = NULL, *classical_encoded_point = NULL, *oqs_encoded_point = NULL, *oqkd_encoded_point = NULL;
     EVP_PKEY *key_share_key = NULL;
     size_t encodedlen = 0;
-    uint16_t classical_encodedlen = 0, oqs_encodedlen = 0;
+    uint16_t classical_encodedlen = 0, oqs_encodedlen = 0, oqkd_encodedlen = 0;
     int do_pqc = IS_OQS_KEM_CURVEID(curve_id); /* 1 if post-quantum alg, 0 otherwise */
     int do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(curve_id); /* 1 if post-quantum hybrid alg, 0 otherwise */
     if (s->s3->tmp.pkey != NULL) {
@@ -665,12 +665,25 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
 
     if (do_hybrid) {
       uint16_t encodedlen16;
-      if (!OQS_encode_hybrid_message(classical_encoded_point, classical_encodedlen, oqs_encoded_point, oqs_encodedlen, &encoded_point, &encodedlen16)) {
-        goto err;
+      int do_oqkd = IS_OQKD_OQS_KEM_CURVEID(curve_id);
+      if (!do_oqkd) {
+        if (!OQS_encode_hybrid_message(classical_encoded_point, classical_encodedlen, oqs_encoded_point, oqs_encodedlen, &encoded_point, &encodedlen16)) {
+          goto err;
+        }
+        encodedlen = encodedlen16;
+        OPENSSL_free(classical_encoded_point);
+        OPENSSL_free(oqs_encoded_point);
+      } else {
+        // get oqkd key share
+        if (!OQKD_OQS_encode_triple_message(classical_encoded_point, classical_encodedlen,
+            oqs_encoded_point, oqs_encodedlen, oqkd_encoded_point, oqkd_encodedlen, &encoded_point, &encodedlen16)) {
+          goto err;
+        }
+        encodedlen = encodedlen16;
+        OPENSSL_free(classical_encoded_point);
+        OPENSSL_free(oqs_encoded_point);
+        OPENSSL_free(oqkd_encoded_point);
       }
-      encodedlen = encodedlen16;
-      OPENSSL_free(classical_encoded_point);
-      OPENSSL_free(oqs_encoded_point);
     } else if (do_pqc) {
       encoded_point = oqs_encoded_point;
       encodedlen = oqs_encodedlen;

@@ -718,6 +718,8 @@
 // TBD, ideally, this bracket is also generated
 #define IS_OQS_KEM_HYBRID_CURVEID(id) (id >= 0x2F00 && id <= 0x2FFF)
 
+#define IS_OQKD_OQS_KEM_CURVEID(id) (id >= 0x2F60 && id <= 0x2FFF)
+
 /* Returns the OQS alg ID for OQS API */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_ALG_NAME_START
 #define OQS_ALG_NAME(nid) \
