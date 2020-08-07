@@ -1116,7 +1116,7 @@ static const unsigned char so[8044] = {
     0x2B,0xCE,0x0F,0x06,0x01,0x03,                 /* [ 8037] OBJ_rsa3072_sphincsharaka128frobust */
 };
 
-#define NUM_NID 1313
+#define NUM_NID 1315
 static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"UNDEF", "undefined", NID_undef},
     {"rsadsi", "RSA Data Security, Inc.", NID_rsadsi, 6, &so[0]},
@@ -2431,9 +2431,11 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"p384_mamabearephem", "p384_mamabearephem", NID_p384_mamabearephem},
     {"papabearephem", "papabearephem", NID_papabearephem},
     {"p521_papabearephem", "p521_papabearephem", NID_p521_papabearephem},
+    {"oqkd_frodo640aes", "oqkd_frodo640aes", NID_oqkd_frodo640aes},
+    {"p256_oqkd_frodo640aes", "p256_oqkd_frodo640aes", NID_p256_oqkd_frodo640aes},
 };
 
-#define NUM_SN 1304
+#define NUM_SN 1306
 static const unsigned int sn_objs[NUM_SN] = {
      364,    /* "AD_DVCS" */
      419,    /* "AES-128-CBC" */
@@ -3336,6 +3338,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1269,    /* "ntru_hps4096821" */
     1271,    /* "ntru_hrss701" */
      681,    /* "onBasis" */
+    1313,    /* "oqkd_frodo640aes" */
     1233,    /* "oqs_kem_default" */
     1195,    /* "oqs_sig_default" */
     1089,    /* "organizationIdentifier" */
@@ -3358,6 +3361,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1212,    /* "p256_mqdss3148" */
     1262,    /* "p256_newhope512cca" */
     1266,    /* "p256_ntru_hps2048509" */
+    1314,    /* "p256_oqkd_frodo640aes" */
     1234,    /* "p256_oqs_kem_default" */
     1196,    /* "p256_oqs_sig_default" */
     1218,    /* "p256_picnic3l1" */
@@ -3741,7 +3745,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1093,    /* "x509ExtAdmission" */
 };
 
-#define NUM_LN 1304
+#define NUM_LN 1306
 static const unsigned int ln_objs[NUM_LN] = {
      363,    /* "AD Time Stamping" */
      405,    /* "ANSI X9.62" */
@@ -4614,6 +4618,7 @@ static const unsigned int ln_objs[NUM_LN] = {
     1269,    /* "ntru_hps4096821" */
     1271,    /* "ntru_hrss701" */
      681,    /* "onBasis" */
+    1313,    /* "oqkd_frodo640aes" */
     1233,    /* "oqs_kem_default" */
     1195,    /* "oqs_sig_default" */
      379,    /* "org" */
@@ -4639,6 +4644,7 @@ static const unsigned int ln_objs[NUM_LN] = {
     1212,    /* "p256_mqdss3148" */
     1262,    /* "p256_newhope512cca" */
     1266,    /* "p256_ntru_hps2048509" */
+    1314,    /* "p256_oqkd_frodo640aes" */
     1234,    /* "p256_oqs_kem_default" */
     1196,    /* "p256_oqs_sig_default" */
     1218,    /* "p256_picnic3l1" */

@@ -562,8 +562,9 @@
   (nid == NID_babybearephem ? 0x022F : \
   (nid == NID_mamabearephem ? 0x0230 : \
   (nid == NID_papabearephem ? 0x0231 : \
+  (nid == NID_oqkd_frodo640aes ? 0x0260 : \
   0 \
-  ))))))))))))))))))))))))))))))))))))))))
+  )))))))))))))))))))))))))))))))))))))))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_CURVEID_END
 
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_HYBRID_CURVEID_START
@@ -608,8 +609,9 @@
     (nid == NID_p256_babybearephem ? 0x2F2F : \
     (nid == NID_p384_mamabearephem ? 0x2F30 : \
     (nid == NID_p521_papabearephem ? 0x2F31 : \
+    (nid == NID_p256_oqkd_frodo640aes ? 0x2F60 : \
   0 \
-  ))))))))))))))))))))))))))))))))))))))))
+  )))))))))))))))))))))))))))))))))))))))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_HYBRID_CURVEID_END
 
   /* Returns the non-hybrid OQS KEM NID for a PQ or hybrid curve ID */
@@ -655,8 +657,9 @@
   (curveID == 0x022F || curveID == 0x2F2F ? NID_babybearephem : \
   (curveID == 0x0230 || curveID == 0x2F30 ? NID_mamabearephem : \
   (curveID == 0x0231 || curveID == 0x2F31 ? NID_papabearephem : \
+  (curveID == 0x0260 || curveID == 0x2F60 ? NID_oqkd_frodo640aes : \
   0 \
-  ))))))))))))))))))))))))))))))))))))))))
+  )))))))))))))))))))))))))))))))))))))))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_KEM_NID_END
 
   /* Returns the hybrid OQS KEM NID for a hybrid curve ID */
@@ -702,8 +705,9 @@
     (curveID == 0x2F2F ? NID_p256_babybearephem : \
     (curveID == 0x2F30 ? NID_p384_mamabearephem : \
     (curveID == 0x2F31 ? NID_p521_papabearephem : \
+    (curveID == 0x2F60 ? NID_p256_oqkd_frodo640aes : \
   0 \
-  ))))))))))))))))))))))))))))))))))))))))
+  )))))))))))))))))))))))))))))))))))))))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_HYBRID_KEM_NID_END
 
 /* Returns true if the curve ID is for an OQS KEM */
@@ -757,8 +761,9 @@
   (nid == NID_babybearephem ? OQS_KEM_alg_threebears_babybear_ephem : \
   (nid == NID_mamabearephem ? OQS_KEM_alg_threebears_mamabear_ephem : \
   (nid == NID_papabearephem ? OQS_KEM_alg_threebears_papabear_ephem : \
+  (nid == NID_oqkd_frodo640aes ? OQS_KEM_alg_frodokem_640_aes : \
   0 \
-  ))))))))))))))))))))))))))))))))))))))))
+  )))))))))))))))))))))))))))))))))))))))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_ALG_NAME_END
 
 /* Returns the classic curve ID for a given hybrid curve */
@@ -804,8 +809,9 @@
   (cid == 0x2F2F ?23: \
   (cid == 0x2F30 ?24: \
   (cid == 0x2F31 ?25: \
+  (cid == 0x2F60 ?23: \
   23 \
-  ))))))))))))))))))))))))))))))))))))))))
+  )))))))))))))))))))))))))))))))))))))))))
 ///// OQS_TEMPLATE_FRAGMENT_OQS_MAP_HYBRID_END
 
 /* Returns the classical nid for an hybrid alg */

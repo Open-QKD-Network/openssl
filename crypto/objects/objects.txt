@@ -1757,6 +1757,8 @@ dstu4145le 2 9 : uacurve9 : DSTU curve 9
  : p384_mamabearephem : p384_mamabearephem
  : papabearephem : papabearephem
  : p521_papabearephem : p521_papabearephem
+ : oqkd_frodo640aes : oqkd_frodo640aes
+ : p256_oqkd_frodo640aes : p256_oqkd_frodo640aes
 ##### OQS_TEMPLATE_FRAGMENT_LIST_KEMS_END
 
 ##### OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_OIDS_START

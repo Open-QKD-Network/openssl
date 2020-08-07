@@ -5517,6 +5517,14 @@
 #define LN_p521_papabearephem           "p521_papabearephem"
 #define NID_p521_papabearephem          1312
 
+#define SN_oqkd_frodo640aes             "oqkd_frodo640aes"
+#define LN_oqkd_frodo640aes             "oqkd_frodo640aes"
+#define NID_oqkd_frodo640aes            1313
+
+#define SN_p256_oqkd_frodo640aes                "p256_oqkd_frodo640aes"
+#define LN_p256_oqkd_frodo640aes                "p256_oqkd_frodo640aes"
+#define NID_p256_oqkd_frodo640aes               1314
+
 #define SN_oqs_sig_default              "oqs_sig_default"
 #define LN_oqs_sig_default              "oqs_sig_default"
 #define NID_oqs_sig_default             1195
