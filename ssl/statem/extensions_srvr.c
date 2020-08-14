@@ -632,8 +632,9 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
     int found = 0;
     int do_pqc = 0; /* 1 if post-quantum alg, 0 otherwise */
     int do_hybrid = 0; /* 1 if post-quantum hybrid alg, 0 otherwise */
-    unsigned char *classical_encoded_pt = NULL, *oqs_encoded_pt = NULL;
-    uint16_t classical_encodedlen = 0, oqs_encodedlen = 0;
+    int do_oqkd = 0; /* 1 if oqkd and hybrid, 0 only hybrid */
+    unsigned char *classical_encoded_pt = NULL, *oqs_encoded_pt = NULL, *oqkd_encoded_pt = NULL;
+    uint16_t classical_encodedlen = 0, oqs_encodedlen = 0, oqkd_encodedlen = 0;
     int has_error = 0;
 
     if (s->hit && (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE_DHE) == 0)
@@ -722,12 +723,21 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
         /* check if we are dealing with pqc or hybrid */
         do_pqc = IS_OQS_KEM_CURVEID(group_id);
         do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(group_id);
+        do_oqkd = IS_OQKD_OQS_KEM_CURVEID(group_id);
 
         /* parse the encoded_pt, which is either a classical, PQC, or hybrid (both) message. */
         if (do_hybrid) {
-          if (!OQS_decode_hybrid_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen, &oqs_encoded_pt, &oqs_encodedlen)) {
-            has_error = 1;
-            goto oqs_cleanup;
+          if (!do_oqkd) {
+            if (!OQS_decode_hybrid_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen, &oqs_encoded_pt, &oqs_encodedlen)) {
+              has_error = 1;
+              goto oqs_cleanup;
+            }
+          } else {
+            if (!OQKD_OQS_decode_triple_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen,
+                &oqs_encoded_pt, &oqs_encodedlen, &oqkd_encoded_pt, &oqkd_encodedlen)) {
+              has_error = 1;
+              goto oqs_cleanup;
+            }
           }
         } else if (do_pqc) {
           oqs_encoded_pt = (unsigned char*) PACKET_data(&encoded_pt);
@@ -743,6 +753,7 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
           unsigned char* peer_key = OPENSSL_malloc(s->s3->tmp.oqs_peer_msg_len);
           memcpy(peer_key, peer_msg, s->s3->tmp.oqs_peer_msg_len); /* FIXMEOQS: when should I free that? */
           s->s3->tmp.oqs_kem_client = peer_key;
+          /* Where we save the oqkd encoded_pt ffs*/
           /* OQS note: we are not using peer_tmp in the oqs case, but the kex fails if this
              value is null, so we instantiate it but we don't assign any value. It will get
              cleaned up later.
@@ -786,6 +797,9 @@ int tls_parse_ctos_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
            just pointers into the packet, and openssl will clean them up */
         OPENSSL_free(classical_encoded_pt);
         OPENSSL_free(oqs_encoded_pt);
+        if (do_oqkd) {
+          OPENSSL_free(oqkd_encoded_pt);
+        }
       }
       if (has_error) {
         return 0;
@@ -1751,12 +1765,13 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
 #ifndef OPENSSL_NO_TLS1_3
     unsigned char *encodedPoint = NULL, *classical_encodedPoint = NULL, *oqs_encodedPoint = NULL;
     size_t encoded_pt_len = 0;
-    uint16_t classical_encoded_pt_len = 0, oqs_encoded_pt_len = 0;
-    unsigned char* shared_secret = NULL, *oqs_shared_secret = NULL;
-    size_t shared_secret_len = 0, oqs_shared_secret_len = 0;
+    uint16_t classical_encoded_pt_len = 0, oqs_encoded_pt_len = 0, oqkd_encoded_pt_len = 0;
+    unsigned char* shared_secret = NULL, *oqs_shared_secret = NULL, *oqkd_shared_secred = NULL;
+    size_t shared_secret_len = 0, oqs_shared_secret_len = 0, oqkd_shared_secret_len = 0;
     EVP_PKEY *ckey = s->s3->peer_tmp, *skey = NULL;
     int do_pqc = 0; /* 1 if post-quantum alg, 0 otherwise */
     int do_hybrid = 0; /* 1 if post-quantum hybrid alg, 0 otherwise */
+    int do_oqkd = 0; /* 1 if oqkd and hybrid, 0 only hybrid */
 
     if (s->hello_retry_request == SSL_HRR_PENDING) {
       if (ckey != NULL) { /* this is null in OQS, is this ok? (FIXMEOQS) */
@@ -1796,6 +1811,7 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
 
     do_pqc = IS_OQS_KEM_CURVEID(s->s3->group_id);
     do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(s->s3->group_id);
+    do_oqkd = IS_OQKD_OQS_KEM_CURVEID(s->s3->group_id);
     if (!do_pqc || do_hybrid) {
       skey = ssl_generate_pkey(ckey);
       if (skey == NULL) {
@@ -1865,6 +1881,7 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
           shared_secret = OPENSSL_malloc(shared_secret_len);
           memcpy(shared_secret, s->s3->tmp.pms, s->s3->tmp.pmslen);
           memcpy(shared_secret + s->s3->tmp.pmslen, oqs_shared_secret, oqs_shared_secret_len);
+          /*get OpenQKD key and concatentate it to shared_secret ffs*/
         } else {
           /* we use the oqs shared secret */
           shared_secret_len = oqs_shared_secret_len;
@@ -1897,6 +1914,7 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
 
     if (do_hybrid) {
       uint16_t encoded_pt_len16;
+      /* For OQKD, we do NOT need to encode the OQKD key into keyshare */
       int ret = OQS_encode_hybrid_message(classical_encodedPoint, classical_encoded_pt_len, oqs_encodedPoint, oqs_encoded_pt_len, &encodedPoint, &encoded_pt_len16);
       encoded_pt_len = encoded_pt_len16;
       OPENSSL_free(classical_encodedPoint);

@@ -600,6 +600,7 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
     uint16_t classical_encodedlen = 0, oqs_encodedlen = 0, oqkd_encodedlen = 0;
     int do_pqc = IS_OQS_KEM_CURVEID(curve_id); /* 1 if post-quantum alg, 0 otherwise */
     int do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(curve_id); /* 1 if post-quantum hybrid alg, 0 otherwise */
+    int do_oqkd = IS_OQKD_OQS_KEM_CURVEID(curve_id); /* 1 if oqkd and hybrid, 0 only hybrid */
     if (s->s3->tmp.pkey != NULL) {
         if (!ossl_assert(s->hello_retry_request == SSL_HRR_PENDING)) {
             SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_ADD_KEY_SHARE, ERR_R_INTERNAL_ERROR);
@@ -665,7 +666,6 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
 
     if (do_hybrid) {
       uint16_t encodedlen16;
-      int do_oqkd = IS_OQKD_OQS_KEM_CURVEID(curve_id);
       if (!do_oqkd) {
         if (!OQS_encode_hybrid_message(classical_encoded_point, classical_encodedlen, oqs_encoded_point, oqs_encodedlen, &encoded_point, &encodedlen16)) {
           goto err;
@@ -674,6 +674,9 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
         OPENSSL_free(classical_encoded_point);
         OPENSSL_free(oqs_encoded_point);
       } else {
+        oqkd_encodedlen = strlen("http://192.168.2.207/api/newkey?src=A&dst=C");
+        oqkd_encoded_point = OPENSSL_malloc(oqkd_encodedlen);
+        memcpy(oqkd_encoded_point, "http://192.168.2.207/api/newkey?src=A&dst=C", oqkd_encodedlen);
         // get oqkd key share
         if (!OQKD_OQS_encode_triple_message(classical_encoded_point, classical_encodedlen,
             oqs_encoded_point, oqs_encodedlen, oqkd_encoded_point, oqkd_encodedlen, &encoded_point, &encodedlen16)) {
@@ -1872,6 +1875,7 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
     EVP_PKEY *ckey = s->s3->tmp.pkey, *skey = NULL;
     int do_pqc = 0;
     int do_hybrid = 0;
+    int do_oqkd = 0;
     int has_error = 0;
 
     /* OQS note: this block has been moved up to learn the group_id sooner */
@@ -1882,6 +1886,7 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
     }
     do_pqc = IS_OQS_KEM_CURVEID(group_id); /* 1 if post-quantum alg, 0 otherwise */
     do_hybrid = IS_OQS_KEM_HYBRID_CURVEID(group_id); /* 1 if post-quantum hybrid alg, 0 otherwise */
+    do_oqkd = IS_OQKD_OQS_KEM_CURVEID(group_id); /* 1 if oqkd and hybrid, 0 only hybrid */
 
     /* Sanity check */
     if ((!do_pqc || do_hybrid) && (ckey == NULL || s->s3->peer_tmp != NULL)) {
@@ -1948,6 +1953,7 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
 
     /* parse the encoded_pt, which is either a classical, PQC, or hybrid (both) message. */
     if (do_hybrid) {
+      /* For OQKD, we do NOT need to decode the OQKD key from keyshare */
       if (!OQS_decode_hybrid_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen, &oqs_encoded_pt, &oqs_encodedlen)) {
         has_error = 1;
         goto oqs_cleanup;
@@ -2015,6 +2021,9 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
           shared_secret = OPENSSL_malloc(shared_secret_len);
           memcpy(shared_secret, s->s3->tmp.pms, s->s3->tmp.pmslen);
           memcpy(shared_secret + s->s3->tmp.pmslen, oqs_shared_secret, oqs_shared_secret_len);
+          if (do_oqkd) {
+              // get OpenQKD key and contactenate it to shared_secret ffs*/
+          }
         } else {
           /* we use the oqs shared secret */
           shared_secret_len = oqs_shared_secret_len;
