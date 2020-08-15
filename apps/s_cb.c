@@ -1012,6 +1012,13 @@ int verify_stateless_cookie_callback(SSL *ssl, const unsigned char *cookie,
     return verify_cookie_callback(ssl, cookie, cookie_len);
 }
 
+int oqkd_new_key_url_callback(char** url, int *len) {
+    char new_url[] = "http://127.0.0.1/siteId=C";
+    *len = strlen(new_url);
+    *url = malloc(len);
+    memcpy(*url, new_url, *len);
+    return 1;
+}
 #endif
 
 /*

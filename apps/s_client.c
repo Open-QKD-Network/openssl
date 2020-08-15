@@ -1961,6 +1961,9 @@ int s_client_main(int argc, char **argv)
     if (con == NULL)
         goto end;
 
+    /*OQKD*/
+    SSL_set_oqkd_new_key_url_callback(con, oqkd_new_key_url_callback);
+
     if (enable_pha)
         SSL_set_post_handshake_auth(con, 1);
 

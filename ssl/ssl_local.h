@@ -1900,6 +1900,12 @@ struct ssl_st {
      */
     const struct sigalg_lookup_st **shared_sigalgs;
     size_t shared_sigalgslen;
+    /*OpenQKD callback*/
+    /*For client*/
+    int (*oqkd_new_key_url_callback) (char** url, int* len);
+    int (*oqkd_get_key_callback) (char* get_key_url, char** key, int* keylen);
+    /* For server */
+    int (*oqkd_new_key_callback) (char* new_key_url, char** key, int* keylen);
 };
 
 /*

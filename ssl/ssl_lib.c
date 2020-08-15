@@ -1667,6 +1667,21 @@ long SSL_get_default_timeout(const SSL *s)
     return s->method->get_timeout();
 }
 
+void SSL_set_oqkd_new_key_url_callback(SSL *s, int (*callback)(char**url, int* len)) {
+    if (callback != NULL)
+        s->oqkd_new_key_url_callback = callback;
+}
+
+void SSL_set_oqkd_new_key_callback(SSL *s, int (*callback)(char* new_key_url, char** key, int* keylen)) {
+    if (callback != NULL)
+        s->oqkd_new_key_callback = callback;
+}
+
+void SSL_set_oqkd_get_key_callback(SSL *s, int (*callback)(char* get_key_url, char** key, int* keylen)) {
+    if (callback != NULL)
+        s->oqkd_get_key_callback = callback;
+}
+
 static int ssl_start_async_job(SSL *s, struct ssl_async_args *args,
                                int (*func) (void *))
 {

@@ -2779,6 +2779,21 @@ static int init_ssl_connection(SSL *con)
         }
     } else {
         do {
+            int sock = SSL_get_fd(con);
+            struct sockaddr_in peer;
+            int peer_len = sizeof(peer);
+            int ret = getpeername(sock, (struct sockaddr *) &peer, &peer_len);
+            char peer_name[256] = "";
+            if (inet_ntop(AF_INET, &peer.sin_addr, peer_name, sizeof(peer_name)) != NULL) {
+              printf("peer_name:%s\n", peer_name);
+            }
+            BIO_ADDR* peer2 = BIO_ADDR_new();
+            peer_len = sizeof(peer);
+            //socklen_t peer_len = 16;
+            //int ret = getpeername(sock, (struct sockaddr *)BIO_ADDR_sockaddr_noconst(peer), &peer_len);
+            int ret2 = getpeername(sock, (struct sockaddr *)peer2, &peer_len);
+            //char* peer_name = BIO_ADDR_hostname_string(peer2, 1);
+            char* peer_name2 = inet_ntoa(((struct sockaddr_in*) peer2)->sin_addr);
             i = SSL_accept(con);
 
             if (i <= 0)

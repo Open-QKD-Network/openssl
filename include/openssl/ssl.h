@@ -293,6 +293,10 @@ typedef int (*SSL_custom_ext_parse_cb_ex)(SSL *s, unsigned int ext_type,
 /* Typedef for verification callback */
 typedef int (*SSL_verify_cb)(int preverify_ok, X509_STORE_CTX *x509_ctx);
 
+typedef int (*SSL_oqkd_new_key_url_cb)(char**url, int* len);
+typedef int (*SSL_oqkd_get_key_cb)(char* get_key_url, char** key, int* keylen);
+typedef int (*SSL_oqkd_new_key_cb)(char* new_key_url, char** key, int* keylen);
+
 /*
  * Some values are reserved until OpenSSL 1.2.0 because they were previously
  * included in SSL_OP_ALL in a 1.1.x release.
@@ -1562,6 +1566,10 @@ __owur SSL_verify_cb SSL_get_verify_callback(const SSL *s);
 void SSL_set_verify(SSL *s, int mode, SSL_verify_cb callback);
 void SSL_set_verify_depth(SSL *s, int depth);
 void SSL_set_cert_cb(SSL *s, int (*cb) (SSL *ssl, void *arg), void *arg);
+void SSL_set_oqkd_new_key_url_callback(SSL *s, SSL_oqkd_new_key_url_cb callback);
+void SSL_set_oqkd_new_key_callback(SSL *s, SSL_oqkd_new_key_cb callback);
+void SSL_set_oqkd_get_key_callback(SSL *s, SSL_oqkd_get_key_cb callback);
+
 # ifndef OPENSSL_NO_RSA
 __owur int SSL_use_RSAPrivateKey(SSL *ssl, RSA *rsa);
 __owur int SSL_use_RSAPrivateKey_ASN1(SSL *ssl, const unsigned char *d,
