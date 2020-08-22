@@ -674,18 +674,26 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
         OPENSSL_free(classical_encoded_point);
         OPENSSL_free(oqs_encoded_point);
       } else {
-        oqkd_encodedlen = strlen("http://192.168.2.207/api/newkey?src=A&dst=C");
-        oqkd_encoded_point = OPENSSL_malloc(oqkd_encodedlen);
-        memcpy(oqkd_encoded_point, "http://192.168.2.207/api/newkey?src=A&dst=C", oqkd_encodedlen);
-        // get oqkd key share
-        if (!OQKD_OQS_encode_triple_message(classical_encoded_point, classical_encodedlen,
-            oqs_encoded_point, oqs_encodedlen, oqkd_encoded_point, oqkd_encodedlen, &encoded_point, &encodedlen16)) {
+        if (s->oqkd_new_key_url_callback != NULL) {
+          int ret = s->oqkd_new_key_url_callback(&oqkd_encoded_point, &oqkd_encodedlen);
+          if (ret != 1 || (oqkd_encodedlen <= 0) || (oqkd_encoded_point == NULL) ||
+            !OQKD_OQS_encode_triple_message(classical_encoded_point, classical_encodedlen,
+              oqs_encoded_point, oqs_encodedlen, oqkd_encoded_point, oqkd_encodedlen, &encoded_point, &encodedlen16)) {
+            SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_ADD_KEY_SHARE, ERR_R_INTERNAL_ERROR);
+            OPENSSL_free(classical_encoded_point);
+            OPENSSL_free(oqs_encoded_point);
+            goto err;
+          }
+          encodedlen = encodedlen16;
+          OPENSSL_free(classical_encoded_point);
+          OPENSSL_free(oqs_encoded_point);
+          OPENSSL_free(oqkd_encoded_point);
+        } else {
+          SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_ADD_KEY_SHARE, ERR_R_INTERNAL_ERROR);
+          OPENSSL_free(classical_encoded_point);
+          OPENSSL_free(oqs_encoded_point);
           goto err;
         }
-        encodedlen = encodedlen16;
-        OPENSSL_free(classical_encoded_point);
-        OPENSSL_free(oqs_encoded_point);
-        OPENSSL_free(oqkd_encoded_point);
       }
     } else if (do_pqc) {
       encoded_point = oqs_encoded_point;

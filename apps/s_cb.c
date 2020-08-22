@@ -1013,9 +1013,10 @@ int verify_stateless_cookie_callback(SSL *ssl, const unsigned char *cookie,
 }
 
 int oqkd_new_key_url_callback(char** url, int *len) {
-    char new_url[] = "http://127.0.0.1/siteId=C";
+    // call openQKD to get new key url, hardcod it for now.
+    char new_url[] = "http://localhost:8095/api/newkey?siteId=C";
     *len = strlen(new_url);
-    *url = malloc(len);
+    *url = malloc(*len);
     memcpy(*url, new_url, *len);
     return 1;
 }
