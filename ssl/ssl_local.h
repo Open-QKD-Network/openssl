@@ -1905,7 +1905,7 @@ struct ssl_st {
     int (*oqkd_new_key_url_callback) (char** url, int* len);
     int (*oqkd_get_key_callback) (char* get_key_url, char** key, int* keylen);
     /* For server */
-    int (*oqkd_new_key_callback) (char* new_key_url, char** key, int* keylen);
+    int (*oqkd_new_key_callback) (char* new_key_url, char** key, int* keylen, char** get_key_url);
 };
 
 /*
@@ -2081,6 +2081,7 @@ typedef struct ssl3_state_st {
         OQS_KEM* oqs_kem; /* KEM context */
         int oqs_peer_msg_len; /* save peer message's len */
         void* oqs_kem_client; /* oqs client private key (in extensions_clnt.c) or message (in extensions_srvr.c) */
+        char* oqkd_peer_msg; /* 0 terminated string . In server, this is the OQKD keyshare in ClientHello */
     } tmp;
 
     /* Connection binding to prevent renegotiation attacks */

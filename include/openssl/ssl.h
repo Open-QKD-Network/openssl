@@ -295,7 +295,7 @@ typedef int (*SSL_verify_cb)(int preverify_ok, X509_STORE_CTX *x509_ctx);
 
 typedef int (*SSL_oqkd_new_key_url_cb)(char**url, int* len);
 typedef int (*SSL_oqkd_get_key_cb)(char* get_key_url, char** key, int* keylen);
-typedef int (*SSL_oqkd_new_key_cb)(char* new_key_url, char** key, int* keylen);
+typedef int (*SSL_oqkd_new_key_cb)(char* new_key_url, char** key, int* keylen, char** get_key_url);
 
 /*
  * Some values are reserved until OpenSSL 1.2.0 because they were previously

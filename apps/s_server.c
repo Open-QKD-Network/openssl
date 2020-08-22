@@ -2260,6 +2260,9 @@ static int sv_body(int s, int stype, int prot, unsigned char *context)
         goto err;
     }
 
+    /*OQKD*/
+    SSL_set_oqkd_new_key_callback(con, oqkd_new_key_callback);
+
     if (s_tlsextdebug) {
         SSL_set_tlsext_debug_callback(con, tlsext_cb);
         SSL_set_tlsext_debug_arg(con, bio_s_out);

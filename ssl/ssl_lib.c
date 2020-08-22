@@ -1672,7 +1672,7 @@ void SSL_set_oqkd_new_key_url_callback(SSL *s, int (*callback)(char**url, int* l
         s->oqkd_new_key_url_callback = callback;
 }
 
-void SSL_set_oqkd_new_key_callback(SSL *s, int (*callback)(char* new_key_url, char** key, int* keylen)) {
+void SSL_set_oqkd_new_key_callback(SSL *s, int (*callback)(char* new_key_url, char** key, int* keylen, char**get_key_url)) {
     if (callback != NULL)
         s->oqkd_new_key_callback = callback;
 }
