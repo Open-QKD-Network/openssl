@@ -49,6 +49,7 @@ int verify_cookie_callback(SSL *ssl, const unsigned char *cookie,
 
 int oqkd_new_key_url_callback(char ** url, int* len);
 int oqkd_new_key_callback(char* new_key_url, char** key, int *key_len, char** get_key_url);
+int oqkd_get_key_callback(char* get_key_url, char** key, int *key_len);
 
 #ifdef __VMS                     /* 31 char symbol name limit */
 # define generate_stateless_cookie_callback      generate_stateless_cookie_cb

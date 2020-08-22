@@ -1876,10 +1876,10 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
 #ifndef OPENSSL_NO_TLS1_3
     unsigned int group_id;
     PACKET encoded_pt;
-    unsigned char *classical_encoded_pt = NULL, *oqs_encoded_pt = NULL;
-    uint16_t classical_encodedlen, oqs_encodedlen;
-    unsigned char *shared_secret = NULL, *oqs_shared_secret = NULL;
-    size_t shared_secret_len = 0, oqs_shared_secret_len = 0;
+    unsigned char *classical_encoded_pt = NULL, *oqs_encoded_pt = NULL, *oqkd_encoded_pt = NULL;
+    uint16_t classical_encodedlen, oqs_encodedlen, oqkd_encodedlen;
+    unsigned char *shared_secret = NULL, *oqs_shared_secret = NULL, *oqkd_get_key_url = NULL, *oqkd_shared_secret = NULL;
+    size_t shared_secret_len = 0, oqs_shared_secret_len = 0, oqkd_shared_secret_len = 0;
     EVP_PKEY *ckey = s->s3->tmp.pkey, *skey = NULL;
     int do_pqc = 0;
     int do_hybrid = 0;
@@ -1961,10 +1961,25 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
 
     /* parse the encoded_pt, which is either a classical, PQC, or hybrid (both) message. */
     if (do_hybrid) {
-      /* For OQKD, we do NOT need to decode the OQKD key from keyshare */
-      if (!OQS_decode_hybrid_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen, &oqs_encoded_pt, &oqs_encodedlen)) {
-        has_error = 1;
-        goto oqs_cleanup;
+      if (!do_oqkd) {
+        if (!OQS_decode_hybrid_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen, &oqs_encoded_pt, &oqs_encodedlen)) {
+          has_error = 1;
+          goto oqs_cleanup;
+        }
+      } else {
+        if (!OQKD_OQS_decode_triple_message(PACKET_data(&encoded_pt), &classical_encoded_pt, &classical_encodedlen,
+          &oqs_encoded_pt, &oqs_encodedlen, &oqkd_encoded_pt, &oqkd_encodedlen)) {
+          has_error = 1;
+          goto oqs_cleanup;
+        }
+        oqkd_get_key_url = OPENSSL_malloc(oqkd_encodedlen + 1);
+        memset(oqkd_get_key_url, 0, oqkd_encodedlen + 1);
+        memcpy(oqkd_get_key_url, oqkd_encoded_pt, oqkd_encodedlen);
+        if (s->oqkd_get_key_callback != NULL &&
+          s->oqkd_get_key_callback(oqkd_get_key_url, &oqkd_shared_secret, &oqkd_shared_secret_len) != 1) {
+          has_error = 1;
+          goto oqs_cleanup;
+        }
       }
     } else if (do_pqc) {
       oqs_encoded_pt = (unsigned char*) PACKET_data(&encoded_pt);
@@ -2025,12 +2040,12 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
             goto oqs_cleanup;
           }
           /* we concatenate the classical and oqs shared secret */
-          shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len;
+          shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len + oqkd_shared_secret_len;
           shared_secret = OPENSSL_malloc(shared_secret_len);
           memcpy(shared_secret, s->s3->tmp.pms, s->s3->tmp.pmslen);
           memcpy(shared_secret + s->s3->tmp.pmslen, oqs_shared_secret, oqs_shared_secret_len);
           if (do_oqkd) {
-              // get OpenQKD key and contactenate it to shared_secret ffs*/
+            memcpy(shared_secret + s->s3->tmp.pmslen + oqs_shared_secret_len, oqkd_shared_secret, oqkd_shared_secret_len);
           }
         } else {
           /* we use the oqs shared secret */
@@ -2066,6 +2081,10 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
            just pointers into the packet, and openssl will clean them up */
           OPENSSL_free(classical_encoded_pt);
           OPENSSL_free(oqs_encoded_pt);
+          if (do_oqkd) {
+              OPENSSL_free(oqkd_encoded_pt);
+              OPENSSL_free(oqkd_get_key_url);
+          }
         }
         if (has_error) {
           return 0;

@@ -1901,12 +1901,11 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
               goto oqs_cleanup;
             }
             /* we concatenate the classical and oqs shared secret and oqkd shared secret */
-            /*shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len + oqkd_shared_secret_len*/
-            shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len;
+            shared_secret_len = s->s3->tmp.pmslen + oqs_shared_secret_len + oqkd_shared_secret_len;
             shared_secret = OPENSSL_malloc(shared_secret_len);
             memcpy(shared_secret, s->s3->tmp.pms, s->s3->tmp.pmslen);
             memcpy(shared_secret + s->s3->tmp.pmslen, oqs_shared_secret, oqs_shared_secret_len);
-            /*memcpy(shared_secret + s->s3->tmp.pmslen + oqs_shared_secret_len, oqkd_shared_secret, oqkd_shared_secret_len);*/
+            memcpy(shared_secret + s->s3->tmp.pmslen + oqs_shared_secret_len, oqkd_shared_secret, oqkd_shared_secret_len);
           }
         } else {
           /* we use the oqs shared secret */
@@ -1953,9 +1952,8 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
         }
       } else {
         /* For OQKD, we need to encode the getkey url key into keyshare */
-        /*int ret = OQKD_OQS_encode_triple_message(classical_encodedPoint, classical_encoded_pt_len, oqs_encodedPoint, oqs_encoded_pt_len,
-            oqkd_get_key_url, strlen(oqkd_get_key_url), &encodedPoint, &encoded_pt_len16);*/
-        int ret = OQS_encode_hybrid_message(classical_encodedPoint, classical_encoded_pt_len, oqs_encodedPoint, oqs_encoded_pt_len, &encodedPoint, &encoded_pt_len16);
+        int ret = OQKD_OQS_encode_triple_message(classical_encodedPoint, classical_encoded_pt_len, oqs_encodedPoint, oqs_encoded_pt_len,
+          oqkd_get_key_url, strlen(oqkd_get_key_url), &encodedPoint, &encoded_pt_len16);
         encoded_pt_len = encoded_pt_len16;
         OPENSSL_free(classical_encodedPoint);
         OPENSSL_free(oqs_encodedPoint);
