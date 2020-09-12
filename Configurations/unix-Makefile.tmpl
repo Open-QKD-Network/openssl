@@ -340,15 +340,15 @@ CNF_CPPFLAGS={- our $cppflags2 =
                                               @{$config{includes}}),
                               @{$config{cppflags}}) -}
 CNF_CFLAGS={- join(' ', $target{cflags} || (),
-                        "-Ioqs/include",
+                        "-Ioqs/include", "-Iopenqkd/include",
                         @{$config{cflags}}) -}
 CNF_CXXFLAGS={- join(' ', $target{cxxflags} || (),
                           @{$config{cxxflags}}) -}
 CNF_LDFLAGS={- join(' ', $target{lflags} || (),
-                         "-Loqs/lib",
+                         "-Loqs/lib", "-Lopenqkd/lib",
                          @{$config{lflags}}) -}
 CNF_EX_LIBS={- join(' ', $target{ex_libs} || (),
-                         "-loqs",
+                         "-loqs", "-lopenqkd", "-lcurl", "-ljson-c",
                          @{$config{ex_libs}}) -}
 
 # Variables starting with LIB_ are used to build library object files
