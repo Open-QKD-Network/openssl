@@ -1,0 +1,5 @@
+1. On Node B with IP 192.168.2.212
+./apps/openssl s_client -groups p256_oqkd_frodo640aes -CAfile ~/openquantumsafe/openssl/ecdsa_CA.crt --connect 192.168.2.235:4443
+2. On Node C with IP 192.168.2.235
+./apps/openssl s_server -cert ~/openquantumsafe/openssl/ec_srv.crt -key ~/openquantumsafe/openssl/ec_srv.key -tls1_3 -accept 4443
+3. Pcap is in oqs-openqkd-triple-key.pcapng
