@@ -158,6 +158,7 @@ int oqssl_kem_nids_list[] = {
         NID_mamabearephem,
         NID_papabearephem,
         NID_oqkd_frodo640aes,
+        NID_oqkd_frodo640shake,
 /////// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_KEM_NIDS_END
 };
 
@@ -362,6 +363,9 @@ char* get_oqs_alg_name(int openssl_nid)
     case NID_oqkd_frodo640aes:
     case NID_p256_oqkd_frodo640aes:
       return OQS_KEM_alg_frodokem_640_aes;
+    case NID_oqkd_frodo640shake:
+    case NID_p256_oqkd_frodo640shake:
+      return OQS_KEM_alg_frodokem_640_shake;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_ALG_END
     default:
       return NULL;

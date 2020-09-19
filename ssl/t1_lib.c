@@ -222,6 +222,7 @@ static const TLS_GROUP_INFO oqs_nid_list[] = {
     {NID_mamabearephem, 192, TLS_CURVE_CUSTOM}, /* mamabearephem (0x0230) */
     {NID_papabearephem, 256, TLS_CURVE_CUSTOM}, /* papabearephem (0x0231) */
     {NID_oqkd_frodo640aes, 128, TLS_CURVE_CUSTOM}, /* oqkd_frodo640aes (0x0260) */
+    {NID_oqkd_frodo640shake, 128, TLS_CURVE_CUSTOM}, /* oqkd_frodo640shake (0x0261) */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_NID_LIST_END
 };
     /* Hybrid OQS groups. Security level is classical. */
@@ -268,6 +269,7 @@ static const TLS_GROUP_INFO oqs_hybrid_nid_list[] = {
  {NID_p384_mamabearephem, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + mamabearephem hybrid (0x0230) */
  {NID_p521_papabearephem, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + papabearephem hybrid (0x0231) */
  {NID_p256_oqkd_frodo640aes, 128, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_frodo640aes hybrid (0x0260) */
+ {NID_p256_oqkd_frodo640shake, 128, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_frodo640shake hybrid (0x0261) */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_NID_LIST_HYBRID_END
 };
 
@@ -301,6 +303,7 @@ static const uint16_t eccurves_default[] = {
     0x2F2C, /* OQS babybear hybrid */
     0x2F2F, /* OQS babybearephem hybrid */
     0x2F60, /* OQS oqkd_frodo640aes hybrid */
+    0x2F61, /* OQS oqkd_frodo640shake hybrid */
 ///// OQS_TEMPLATE_FRAGMENT_ECCURVES_DEFAULT_HYBRID_END
 };
 
@@ -398,6 +401,8 @@ static const uint16_t oqs_all_tls13_server_groups[] = {
     0x2F31, /* OQS papabearephem hybrid */
     0x0260, /* oqkd_frodo640aes */
     0x2F60, /* OQS oqkd_frodo640aes hybrid */
+    0x0261, /* oqkd_frodo640shake */
+    0x2F61, /* OQS oqkd_frodo640shake hybrid */
 ///// OQS_TEMPLATE_FRAGMENT_ALL_OQS_CURVEIDS_END
 };
 

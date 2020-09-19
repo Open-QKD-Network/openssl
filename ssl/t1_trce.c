@@ -572,6 +572,7 @@ static const ssl_trace_tbl ssl_groups_tbl[] = {
     {OQS_KEM_CURVEID(NID_mamabearephem), "mamabearephem"},
     {OQS_KEM_CURVEID(NID_papabearephem), "papabearephem"},
     {OQS_KEM_CURVEID(NID_oqkd_frodo640aes), "oqkd_frodo640aes"},
+    {OQS_KEM_CURVEID(NID_oqkd_frodo640shake), "oqkd_frodo640shake"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_END
     {OQS_KEM_CURVEID(NID_p256_oqs_kem_default), "p256 - OQS KEM default hybrid"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_HYBRID_START
@@ -615,6 +616,7 @@ static const ssl_trace_tbl ssl_groups_tbl[] = {
     {OQS_KEM_CURVEID(NID_p384_mamabearephem), "p384 - mamabearephem hybrid"},
     {OQS_KEM_CURVEID(NID_p521_papabearephem), "p521 - papabearephem hybrid"},
     {OQS_KEM_CURVEID(NID_p256_oqkd_frodo640aes), "p256 - oqkd_frodo640aes hybrid"},
+    {OQS_KEM_CURVEID(NID_p256_oqkd_frodo640shake), "p256 - oqkd_frodo640shake hybrid"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_HYBRID_END
     {0xFF01, "arbitrary_explicit_prime_curves"},
     {0xFF02, "arbitrary_explicit_char2_curves"}

@@ -5525,6 +5525,14 @@
 #define LN_p256_oqkd_frodo640aes                "p256_oqkd_frodo640aes"
 #define NID_p256_oqkd_frodo640aes               1314
 
+#define SN_oqkd_frodo640shake           "oqkd_frodo640shake"
+#define LN_oqkd_frodo640shake           "oqkd_frodo640shake"
+#define NID_oqkd_frodo640shake          1315
+
+#define SN_p256_oqkd_frodo640shake              "p256_oqkd_frodo640shake"
+#define LN_p256_oqkd_frodo640shake              "p256_oqkd_frodo640shake"
+#define NID_p256_oqkd_frodo640shake             1316
+
 #define SN_oqs_sig_default              "oqs_sig_default"
 #define LN_oqs_sig_default              "oqs_sig_default"
 #define NID_oqs_sig_default             1195
