@@ -1933,9 +1933,13 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
       OQS_KEM_free(oqs_kem);
       OPENSSL_free(s->s3->tmp.oqs_kem_client);
       if (do_oqkd && s->s3->tmp.oqkd_peer_msg != NULL) {
-          OPENSSL_free(s->s3->tmp.oqkd_peer_msg);
+        OPENSSL_free(s->s3->tmp.oqkd_peer_msg);
       }
       if (has_error) {
+        if (do_oqkd) {
+          if (oqkd_shared_secret != NULL) OPENSSL_free(oqkd_shared_secret);
+          if (oqkd_get_key_url != NULL) OPENSSL_free(oqkd_get_key_url);
+        }
         return EXT_RETURN_FAIL;
       }
     }
@@ -1957,7 +1961,8 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
         encoded_pt_len = encoded_pt_len16;
         OPENSSL_free(classical_encodedPoint);
         OPENSSL_free(oqs_encodedPoint);
-        OPENSSL_free(oqkd_get_key_url);
+        if (oqkd_get_key_url != NULL) OPENSSL_free(oqkd_get_key_url);
+        if (oqkd_shared_secret != NULL) OPENSSL_free(oqkd_shared_secret);
         if (!ret) {
           return EXT_RETURN_FAIL;
         }

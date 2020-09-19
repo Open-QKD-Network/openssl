@@ -2082,8 +2082,9 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
           OPENSSL_free(classical_encoded_pt);
           OPENSSL_free(oqs_encoded_pt);
           if (do_oqkd) {
-              OPENSSL_free(oqkd_encoded_pt);
-              OPENSSL_free(oqkd_get_key_url);
+            if (oqkd_encoded_pt != NULL) OPENSSL_free(oqkd_encoded_pt);
+            if (oqkd_get_key_url != NULL) OPENSSL_free(oqkd_get_key_url);
+            if (oqkd_shared_secret != NULL) OPENSSL_free(oqkd_shared_secret);
           }
         }
         if (has_error) {
