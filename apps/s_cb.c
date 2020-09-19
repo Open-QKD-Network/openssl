@@ -1015,13 +1015,6 @@ int verify_stateless_cookie_callback(SSL *ssl, const unsigned char *cookie,
 #endif
 
 int oqkd_new_key_url_callback(char** url, int *len) {
-#if 0
-    char new_url[] = "http://localhost:8095/api/newkey?siteId=C";
-    *len = strlen(new_url);
-    *url = malloc(*len);
-    memcpy(*url, new_url, *len);
-    return 1;
-#else
     if (oqkd_get_new_key_url(url) == 0) {
         printf("oqkd_new_key_url is:%s\n", *url);
         *len = strlen(*url);
@@ -1030,26 +1023,10 @@ int oqkd_new_key_url_callback(char** url, int *len) {
         printf("oqkd_new_key_url fails!\n");
         return -1;
     }
-#endif
 }
 
 /*new_key_url is zero terminated, get_key_url is also zero terminated, key is NOT zero terminated*/
 int oqkd_new_key_callback(char* new_key_url, char** key, int *key_len, char** get_key_url) {
-#if 0
-    char oqkd_get_key_url[] = "http://localhost:8095/api/getkey?siteid=C&index=0&blockid=fab74752-5ab8-4abc-b7f7-b68c142a26f2";
-    int oqkd_get_key_url_len = strlen(oqkd_get_key_url);
-    char oqkd_key[] = "511112088c75557233043e896d5b6a8a65241b2c53dba67321a01bf56284ab7b";
-    int oqkd_key_len = strlen(oqkd_key);
-
-    *key = malloc(oqkd_key_len);
-    *key_len = oqkd_key_len;
-    memcpy(*key, oqkd_key, oqkd_key_len);
-
-    *get_key_url = malloc(oqkd_get_key_url_len + 1);
-    memset(*get_key_url, 0, oqkd_get_key_url_len + 1);
-    memcpy(*get_key_url, oqkd_get_key_url, oqkd_get_key_url_len);
-    return 1;
-#else
     // call openQKD to get new key with new_key_url
     if (oqkd_new_key(new_key_url, key, key_len, get_key_url) == 0) {
         printf("oqkd_new_key succeeds, key_len:%d, get_key_url:%s\n", *key_len, *get_key_url);
@@ -1058,20 +1035,10 @@ int oqkd_new_key_callback(char* new_key_url, char** key, int *key_len, char** ge
         printf("oqkd_new_key fails!\n");
         return -1;
     }
-#endif
 }
 
 /*get_key_url is zero terminated*/
 int oqkd_get_key_callback(char* get_key_url, char** key, int *key_len) {
-#if 0
-    char oqkd_key[] = "511112088c75557233043e896d5b6a8a65241b2c53dba67321a01bf56284ab7b";
-    int oqkd_key_len = strlen(oqkd_key);
-
-    *key = malloc(oqkd_key_len);
-    *key_len = oqkd_key_len;
-    memcpy(*key, oqkd_key, oqkd_key_len);
-    return 1;
-#else
    if (oqkd_get_key(get_key_url, key, key_len) == 0) {
        printf("oqkd_get_key succeeds, key_len:%d\n", *key_len);
        return 0;
@@ -1079,7 +1046,6 @@ int oqkd_get_key_callback(char* get_key_url, char** key, int *key_len) {
        printf("oqkd_get_key fails!\n");
        return -1;
    }
-#endif
 }
 
 /*
