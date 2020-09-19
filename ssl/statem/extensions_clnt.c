@@ -676,7 +676,7 @@ static int add_key_share(SSL *s, WPACKET *pkt, unsigned int curve_id)
       } else {
         if (s->oqkd_new_key_url_callback != NULL) {
           int ret = s->oqkd_new_key_url_callback(&oqkd_encoded_point, &oqkd_encodedlen);
-          if (ret != 1 || (oqkd_encodedlen <= 0) || (oqkd_encoded_point == NULL) ||
+          if (ret != 0 || (oqkd_encodedlen <= 0) || (oqkd_encoded_point == NULL) ||
             !OQKD_OQS_encode_triple_message(classical_encoded_point, classical_encodedlen,
               oqs_encoded_point, oqs_encodedlen, oqkd_encoded_point, oqkd_encodedlen, &encoded_point, &encodedlen16)) {
             SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_ADD_KEY_SHARE, ERR_R_INTERNAL_ERROR);
@@ -1976,7 +1976,7 @@ int tls_parse_stoc_key_share(SSL *s, PACKET *pkt, unsigned int context, X509 *x,
         memset(oqkd_get_key_url, 0, oqkd_encodedlen + 1);
         memcpy(oqkd_get_key_url, oqkd_encoded_pt, oqkd_encodedlen);
         if (s->oqkd_get_key_callback != NULL &&
-          s->oqkd_get_key_callback(oqkd_get_key_url, &oqkd_shared_secret, &oqkd_shared_secret_len) != 1) {
+          s->oqkd_get_key_callback(oqkd_get_key_url, &oqkd_shared_secret, &oqkd_shared_secret_len) != 0) {
           has_error = 1;
           goto oqs_cleanup;
         }

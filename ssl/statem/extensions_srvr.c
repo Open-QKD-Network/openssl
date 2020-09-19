@@ -1894,7 +1894,7 @@ EXT_RETURN tls_construct_stoc_key_share(SSL *s, WPACKET *pkt,
               has_error = 1;
               goto oqs_cleanup;
             }
-            if (s->oqkd_new_key_callback(s->s3->tmp.oqkd_peer_msg, &oqkd_shared_secret, &oqkd_shared_secret_len, &oqkd_get_key_url) != 1 ||
+            if (s->oqkd_new_key_callback(s->s3->tmp.oqkd_peer_msg, &oqkd_shared_secret, &oqkd_shared_secret_len, &oqkd_get_key_url) != 0 ||
               oqkd_shared_secret == NULL || oqkd_shared_secret_len <= 0 || oqkd_get_key_url == NULL) {
               SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_F_TLS_CONSTRUCT_STOC_KEY_SHARE, ERR_R_INTERNAL_ERROR);
               has_error = 1;

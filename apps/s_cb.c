@@ -1025,10 +1025,10 @@ int oqkd_new_key_url_callback(char** url, int *len) {
     if (oqkd_get_new_key_url(url) == 0) {
         printf("oqkd_new_key_url is:%s\n", *url);
         *len = strlen(*url);
-        return 1;
+        return 0;
     } else {
         printf("oqkd_new_key_url fails!\n");
-        return 0;
+        return -1;
     }
 #endif
 }
@@ -1053,10 +1053,10 @@ int oqkd_new_key_callback(char* new_key_url, char** key, int *key_len, char** ge
     // call openQKD to get new key with new_key_url
     if (oqkd_new_key(new_key_url, key, key_len, get_key_url) == 0) {
         printf("oqkd_new_key succeeds, key_len:%d, get_key_url:%s\n", *key_len, *get_key_url);
-        return 1;
+        return 0;
     } else {
         printf("oqkd_new_key fails!\n");
-        return 0;
+        return -1;
     }
 #endif
 }
@@ -1074,10 +1074,10 @@ int oqkd_get_key_callback(char* get_key_url, char** key, int *key_len) {
 #else
    if (oqkd_get_key(get_key_url, key, key_len) == 0) {
        printf("oqkd_get_key succeeds, key_len:%d\n", *key_len);
-       return 1;
+       return 0;
    } else {
        printf("oqkd_get_key fails!\n");
-       return 0;
+       return -1;
    }
 #endif
 }
