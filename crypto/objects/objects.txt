@@ -1761,6 +1761,14 @@ dstu4145le 2 9 : uacurve9 : DSTU curve 9
  : p256_oqkd_frodo640aes : p256_oqkd_frodo640aes
  : oqkd_frodo640shake : oqkd_frodo640shake
  : p256_oqkd_frodo640shake : p256_oqkd_frodo640shake
+ : oqkd_frodo976aes : oqkd_frodo976aes
+ : p384_oqkd_frodo976aes : p384_oqkd_frodo976aes
+ : oqkd_frodo976shake : oqkd_frodo976shake
+ : p384_oqkd_frodo976shake : p384_oqkd_frodo976shake
+ : oqkd_frodo1344aes : oqkd_frodo1344aes
+ : p521_oqkd_frodo1344aes : p521_oqkd_frodo1344aes
+ : oqkd_frodo1344shake : oqkd_frodo1344shake
+ : p521_oqkd_frodo1344shake : p521_oqkd_frodo1344shake
 ##### OQS_TEMPLATE_FRAGMENT_LIST_KEMS_END
 
 ##### OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_OIDS_START

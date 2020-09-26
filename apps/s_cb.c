@@ -518,6 +518,10 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
   case 0x0231: return "papabearephem";
   case 0x0260: return "oqkd_frodo640aes";
   case 0x0261: return "oqkd_frodo640shake";
+  case 0x0262: return "oqkd_frodo976aes";
+  case 0x0263: return "oqkd_frodo976shake";
+  case 0x0264: return "oqkd_frodo1344aes";
+  case 0x0265: return "oqkd_frodo1344shake";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_END
   case 0x2FFF: return "p256_oqs_kem_default hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_START
@@ -562,6 +566,10 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
    case 0x2F31: return "p521_papabearephem hybrid";
    case 0x2F60: return "p256_oqkd_frodo640aes hybrid";
    case 0x2F61: return "p256_oqkd_frodo640shake hybrid";
+   case 0x2F62: return "p384_oqkd_frodo976aes hybrid";
+   case 0x2F63: return "p384_oqkd_frodo976shake hybrid";
+   case 0x2F64: return "p521_oqkd_frodo1344aes hybrid";
+   case 0x2F65: return "p521_oqkd_frodo1344shake hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_END
   default: return "";
   }

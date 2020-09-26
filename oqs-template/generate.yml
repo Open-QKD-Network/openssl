@@ -247,6 +247,30 @@ kems:
     nid_hybrid: "0x2F61"
     oqs_alg: "OQS_KEM_alg_frodokem_640_shake"
     bit_security: 128
+  -
+    name_group: "oqkd_frodo976aes"
+    nid: "0x0262"
+    nid_hybrid: "0x2F62"
+    oqs_alg: "OQS_KEM_alg_frodokem_976_aes"
+    bit_security: 192
+  -
+    name_group: "oqkd_frodo976shake"
+    nid: "0x0263"
+    nid_hybrid: "0x2F63"
+    oqs_alg: "OQS_KEM_alg_frodokem_976_shake"
+    bit_security: 192
+  -
+    name_group: "oqkd_frodo1344aes"
+    nid: "0x0264"
+    nid_hybrid: "0x2F64"
+    oqs_alg: "OQS_KEM_alg_frodokem_1344_aes"
+    bit_security: 256
+  -
+    name_group: "oqkd_frodo1344shake"
+    nid: "0x0265"
+    nid_hybrid: "0x2F65"
+    oqs_alg: "OQS_KEM_alg_frodokem_1344_shake"
+    bit_security: 256
 kem_nid_end: "0x0250"
 kem_nid_hybrid_end: "0x2FFF"
 # need to edit ssl_local.h macros IS_OQS_KEM_CURVEID and IS_OQS_KEM_HYBRID_CURVEID with the above _end values

@@ -1314,3 +1314,11 @@ oqkd_frodo640aes		1313
 p256_oqkd_frodo640aes		1314
 oqkd_frodo640shake		1315
 p256_oqkd_frodo640shake		1316
+oqkd_frodo976aes		1317
+p384_oqkd_frodo976aes		1318
+oqkd_frodo976shake		1319
+p384_oqkd_frodo976shake		1320
+oqkd_frodo1344aes		1321
+p521_oqkd_frodo1344aes		1322
+oqkd_frodo1344shake		1323
+p521_oqkd_frodo1344shake		1324

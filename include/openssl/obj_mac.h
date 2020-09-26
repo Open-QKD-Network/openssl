@@ -5533,6 +5533,38 @@
 #define LN_p256_oqkd_frodo640shake              "p256_oqkd_frodo640shake"
 #define NID_p256_oqkd_frodo640shake             1316
 
+#define SN_oqkd_frodo976aes             "oqkd_frodo976aes"
+#define LN_oqkd_frodo976aes             "oqkd_frodo976aes"
+#define NID_oqkd_frodo976aes            1317
+
+#define SN_p384_oqkd_frodo976aes                "p384_oqkd_frodo976aes"
+#define LN_p384_oqkd_frodo976aes                "p384_oqkd_frodo976aes"
+#define NID_p384_oqkd_frodo976aes               1318
+
+#define SN_oqkd_frodo976shake           "oqkd_frodo976shake"
+#define LN_oqkd_frodo976shake           "oqkd_frodo976shake"
+#define NID_oqkd_frodo976shake          1319
+
+#define SN_p384_oqkd_frodo976shake              "p384_oqkd_frodo976shake"
+#define LN_p384_oqkd_frodo976shake              "p384_oqkd_frodo976shake"
+#define NID_p384_oqkd_frodo976shake             1320
+
+#define SN_oqkd_frodo1344aes            "oqkd_frodo1344aes"
+#define LN_oqkd_frodo1344aes            "oqkd_frodo1344aes"
+#define NID_oqkd_frodo1344aes           1321
+
+#define SN_p521_oqkd_frodo1344aes               "p521_oqkd_frodo1344aes"
+#define LN_p521_oqkd_frodo1344aes               "p521_oqkd_frodo1344aes"
+#define NID_p521_oqkd_frodo1344aes              1322
+
+#define SN_oqkd_frodo1344shake          "oqkd_frodo1344shake"
+#define LN_oqkd_frodo1344shake          "oqkd_frodo1344shake"
+#define NID_oqkd_frodo1344shake         1323
+
+#define SN_p521_oqkd_frodo1344shake             "p521_oqkd_frodo1344shake"
+#define LN_p521_oqkd_frodo1344shake             "p521_oqkd_frodo1344shake"
+#define NID_p521_oqkd_frodo1344shake            1324
+
 #define SN_oqs_sig_default              "oqs_sig_default"
 #define LN_oqs_sig_default              "oqs_sig_default"
 #define NID_oqs_sig_default             1195
