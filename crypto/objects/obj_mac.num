@@ -1322,3 +1322,15 @@ oqkd_frodo1344aes		1321
 p521_oqkd_frodo1344aes		1322
 oqkd_frodo1344shake		1323
 p521_oqkd_frodo1344shake		1324
+oqkd_kyber512		1325
+p256_oqkd_kyber512		1326
+oqkd_kyber768		1327
+p384_oqkd_kyber768		1328
+oqkd_kyber1024		1329
+p521_oqkd_kyber1024		1330
+oqkd_kyber90s512		1331
+p256_oqkd_kyber90s512		1332
+oqkd_kyber90s768		1333
+p384_oqkd_kyber90s768		1334
+oqkd_kyber90s1024		1335
+p521_oqkd_kyber90s1024		1336

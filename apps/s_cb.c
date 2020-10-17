@@ -522,6 +522,12 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
   case 0x0263: return "oqkd_frodo976shake";
   case 0x0264: return "oqkd_frodo1344aes";
   case 0x0265: return "oqkd_frodo1344shake";
+  case 0x0270: return "oqkd_kyber512";
+  case 0x0271: return "oqkd_kyber768";
+  case 0x0272: return "oqkd_kyber1024";
+  case 0x0273: return "oqkd_kyber90s512";
+  case 0x0274: return "oqkd_kyber90s768";
+  case 0x0275: return "oqkd_kyber90s1024";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_END
   case 0x2FFF: return "p256_oqs_kem_default hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_START
@@ -570,6 +576,12 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
    case 0x2F63: return "p384_oqkd_frodo976shake hybrid";
    case 0x2F64: return "p521_oqkd_frodo1344aes hybrid";
    case 0x2F65: return "p521_oqkd_frodo1344shake hybrid";
+   case 0x2F70: return "p256_oqkd_kyber512 hybrid";
+   case 0x2F71: return "p384_oqkd_kyber768 hybrid";
+   case 0x2F72: return "p521_oqkd_kyber1024 hybrid";
+   case 0x2F73: return "p256_oqkd_kyber90s512 hybrid";
+   case 0x2F74: return "p384_oqkd_kyber90s768 hybrid";
+   case 0x2F75: return "p521_oqkd_kyber90s1024 hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_END
   default: return "";
   }
@@ -583,7 +595,7 @@ int ssl_print_tmp_key(BIO *out, SSL *s)
     EVP_PKEY *key;
     int oqs_kem_curve_id = SSL_get_oqs_kem_curve_id(s);
     if (oqs_kem_curve_id != 0) {
-      BIO_printf(out, "Server Temp Key: %s\n", OQS_CURVE_ID_NAME_STR(oqs_kem_curve_id));
+      BIO_printf(out, "Server Temp Key: %X:%s\n", oqs_kem_curve_id, OQS_CURVE_ID_NAME_STR(oqs_kem_curve_id));
       return 1;
     }
     /* ------------- end oqs */

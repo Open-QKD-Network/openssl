@@ -577,6 +577,12 @@ static const ssl_trace_tbl ssl_groups_tbl[] = {
     {OQS_KEM_CURVEID(NID_oqkd_frodo976shake), "oqkd_frodo976shake"},
     {OQS_KEM_CURVEID(NID_oqkd_frodo1344aes), "oqkd_frodo1344aes"},
     {OQS_KEM_CURVEID(NID_oqkd_frodo1344shake), "oqkd_frodo1344shake"},
+    {OQS_KEM_CURVEID(NID_oqkd_kyber512), "oqkd_kyber512"},
+    {OQS_KEM_CURVEID(NID_oqkd_kyber768), "oqkd_kyber768"},
+    {OQS_KEM_CURVEID(NID_oqkd_kyber1024), "oqkd_kyber1024"},
+    {OQS_KEM_CURVEID(NID_oqkd_kyber90s512), "oqkd_kyber90s512"},
+    {OQS_KEM_CURVEID(NID_oqkd_kyber90s768), "oqkd_kyber90s768"},
+    {OQS_KEM_CURVEID(NID_oqkd_kyber90s1024), "oqkd_kyber90s1024"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_END
     {OQS_KEM_CURVEID(NID_p256_oqs_kem_default), "p256 - OQS KEM default hybrid"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_HYBRID_START
@@ -625,6 +631,12 @@ static const ssl_trace_tbl ssl_groups_tbl[] = {
     {OQS_KEM_CURVEID(NID_p384_oqkd_frodo976shake), "p384 - oqkd_frodo976shake hybrid"},
     {OQS_KEM_CURVEID(NID_p521_oqkd_frodo1344aes), "p521 - oqkd_frodo1344aes hybrid"},
     {OQS_KEM_CURVEID(NID_p521_oqkd_frodo1344shake), "p521 - oqkd_frodo1344shake hybrid"},
+    {OQS_KEM_CURVEID(NID_p256_oqkd_kyber512), "p256 - oqkd_kyber512 hybrid"},
+    {OQS_KEM_CURVEID(NID_p384_oqkd_kyber768), "p384 - oqkd_kyber768 hybrid"},
+    {OQS_KEM_CURVEID(NID_p521_oqkd_kyber1024), "p521 - oqkd_kyber1024 hybrid"},
+    {OQS_KEM_CURVEID(NID_p256_oqkd_kyber90s512), "p256 - oqkd_kyber90s512 hybrid"},
+    {OQS_KEM_CURVEID(NID_p384_oqkd_kyber90s768), "p384 - oqkd_kyber90s768 hybrid"},
+    {OQS_KEM_CURVEID(NID_p521_oqkd_kyber90s1024), "p521 - oqkd_kyber90s1024 hybrid"},
 ///// OQS_TEMPLATE_FRAGMENT_SSL_GROUPS_TBL_HYBRID_END
     {0xFF01, "arbitrary_explicit_prime_curves"},
     {0xFF02, "arbitrary_explicit_char2_curves"}

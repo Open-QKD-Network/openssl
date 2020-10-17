@@ -163,6 +163,12 @@ int oqssl_kem_nids_list[] = {
         NID_oqkd_frodo976shake,
         NID_oqkd_frodo1344aes,
         NID_oqkd_frodo1344shake,
+        NID_oqkd_kyber512,
+        NID_oqkd_kyber768,
+        NID_oqkd_kyber1024,
+        NID_oqkd_kyber90s512,
+        NID_oqkd_kyber90s768,
+        NID_oqkd_kyber90s1024,
 /////// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_KEM_NIDS_END
 };
 
@@ -382,6 +388,24 @@ char* get_oqs_alg_name(int openssl_nid)
     case NID_oqkd_frodo1344shake:
     case NID_p521_oqkd_frodo1344shake:
       return OQS_KEM_alg_frodokem_1344_shake;
+    case NID_oqkd_kyber512:
+    case NID_p256_oqkd_kyber512:
+      return OQS_KEM_alg_kyber_512;
+    case NID_oqkd_kyber768:
+    case NID_p384_oqkd_kyber768:
+      return OQS_KEM_alg_kyber_768;
+    case NID_oqkd_kyber1024:
+    case NID_p521_oqkd_kyber1024:
+      return OQS_KEM_alg_kyber_1024;
+    case NID_oqkd_kyber90s512:
+    case NID_p256_oqkd_kyber90s512:
+      return OQS_KEM_alg_kyber_512_90s;
+    case NID_oqkd_kyber90s768:
+    case NID_p384_oqkd_kyber90s768:
+      return OQS_KEM_alg_kyber_768_90s;
+    case NID_oqkd_kyber90s1024:
+    case NID_p521_oqkd_kyber90s1024:
+      return OQS_KEM_alg_kyber_1024_90s;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_ALG_END
     default:
       return NULL;

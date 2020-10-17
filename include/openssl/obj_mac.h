@@ -5565,6 +5565,54 @@
 #define LN_p521_oqkd_frodo1344shake             "p521_oqkd_frodo1344shake"
 #define NID_p521_oqkd_frodo1344shake            1324
 
+#define SN_oqkd_kyber512                "oqkd_kyber512"
+#define LN_oqkd_kyber512                "oqkd_kyber512"
+#define NID_oqkd_kyber512               1325
+
+#define SN_p256_oqkd_kyber512           "p256_oqkd_kyber512"
+#define LN_p256_oqkd_kyber512           "p256_oqkd_kyber512"
+#define NID_p256_oqkd_kyber512          1326
+
+#define SN_oqkd_kyber768                "oqkd_kyber768"
+#define LN_oqkd_kyber768                "oqkd_kyber768"
+#define NID_oqkd_kyber768               1327
+
+#define SN_p384_oqkd_kyber768           "p384_oqkd_kyber768"
+#define LN_p384_oqkd_kyber768           "p384_oqkd_kyber768"
+#define NID_p384_oqkd_kyber768          1328
+
+#define SN_oqkd_kyber1024               "oqkd_kyber1024"
+#define LN_oqkd_kyber1024               "oqkd_kyber1024"
+#define NID_oqkd_kyber1024              1329
+
+#define SN_p521_oqkd_kyber1024          "p521_oqkd_kyber1024"
+#define LN_p521_oqkd_kyber1024          "p521_oqkd_kyber1024"
+#define NID_p521_oqkd_kyber1024         1330
+
+#define SN_oqkd_kyber90s512             "oqkd_kyber90s512"
+#define LN_oqkd_kyber90s512             "oqkd_kyber90s512"
+#define NID_oqkd_kyber90s512            1331
+
+#define SN_p256_oqkd_kyber90s512                "p256_oqkd_kyber90s512"
+#define LN_p256_oqkd_kyber90s512                "p256_oqkd_kyber90s512"
+#define NID_p256_oqkd_kyber90s512               1332
+
+#define SN_oqkd_kyber90s768             "oqkd_kyber90s768"
+#define LN_oqkd_kyber90s768             "oqkd_kyber90s768"
+#define NID_oqkd_kyber90s768            1333
+
+#define SN_p384_oqkd_kyber90s768                "p384_oqkd_kyber90s768"
+#define LN_p384_oqkd_kyber90s768                "p384_oqkd_kyber90s768"
+#define NID_p384_oqkd_kyber90s768               1334
+
+#define SN_oqkd_kyber90s1024            "oqkd_kyber90s1024"
+#define LN_oqkd_kyber90s1024            "oqkd_kyber90s1024"
+#define NID_oqkd_kyber90s1024           1335
+
+#define SN_p521_oqkd_kyber90s1024               "p521_oqkd_kyber90s1024"
+#define LN_p521_oqkd_kyber90s1024               "p521_oqkd_kyber90s1024"
+#define NID_p521_oqkd_kyber90s1024              1336
+
 #define SN_oqs_sig_default              "oqs_sig_default"
 #define LN_oqs_sig_default              "oqs_sig_default"
 #define NID_oqs_sig_default             1195

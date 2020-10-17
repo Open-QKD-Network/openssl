@@ -227,6 +227,12 @@ static const TLS_GROUP_INFO oqs_nid_list[] = {
     {NID_oqkd_frodo976shake, 192, TLS_CURVE_CUSTOM}, /* oqkd_frodo976shake (0x0263) */
     {NID_oqkd_frodo1344aes, 256, TLS_CURVE_CUSTOM}, /* oqkd_frodo1344aes (0x0264) */
     {NID_oqkd_frodo1344shake, 256, TLS_CURVE_CUSTOM}, /* oqkd_frodo1344shake (0x0265) */
+    {NID_oqkd_kyber512, 128, TLS_CURVE_CUSTOM}, /* oqkd_kyber512 (0x0270) */
+    {NID_oqkd_kyber768, 192, TLS_CURVE_CUSTOM}, /* oqkd_kyber768 (0x0271) */
+    {NID_oqkd_kyber1024, 256, TLS_CURVE_CUSTOM}, /* oqkd_kyber1024 (0x0272) */
+    {NID_oqkd_kyber90s512, 128, TLS_CURVE_CUSTOM}, /* oqkd_kyber90s512 (0x0273) */
+    {NID_oqkd_kyber90s768, 192, TLS_CURVE_CUSTOM}, /* oqkd_kyber90s768 (0x0274) */
+    {NID_oqkd_kyber90s1024, 256, TLS_CURVE_CUSTOM}, /* oqkd_kyber90s1024 (0x0275) */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_NID_LIST_END
 };
     /* Hybrid OQS groups. Security level is classical. */
@@ -278,6 +284,12 @@ static const TLS_GROUP_INFO oqs_hybrid_nid_list[] = {
  {NID_p384_oqkd_frodo976shake, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_frodo976shake hybrid (0x0263) */
  {NID_p521_oqkd_frodo1344aes, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_frodo1344aes hybrid (0x0264) */
  {NID_p521_oqkd_frodo1344shake, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_frodo1344shake hybrid (0x0265) */
+ {NID_p256_oqkd_kyber512, 128, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_kyber512 hybrid (0x0270) */
+ {NID_p384_oqkd_kyber768, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_kyber768 hybrid (0x0271) */
+ {NID_p521_oqkd_kyber1024, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_kyber1024 hybrid (0x0272) */
+ {NID_p256_oqkd_kyber90s512, 128, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_kyber90s512 hybrid (0x0273) */
+ {NID_p384_oqkd_kyber90s768, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_kyber90s768 hybrid (0x0274) */
+ {NID_p521_oqkd_kyber90s1024, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_kyber90s1024 hybrid (0x0275) */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_NID_LIST_HYBRID_END
 };
 
@@ -312,6 +324,8 @@ static const uint16_t eccurves_default[] = {
     0x2F2F, /* OQS babybearephem hybrid */
     0x2F60, /* OQS oqkd_frodo640aes hybrid */
     0x2F61, /* OQS oqkd_frodo640shake hybrid */
+    0x2F70, /* OQS oqkd_kyber512 hybrid */
+    0x2F73, /* OQS oqkd_kyber90s512 hybrid */
 ///// OQS_TEMPLATE_FRAGMENT_ECCURVES_DEFAULT_HYBRID_END
 };
 
@@ -419,6 +433,18 @@ static const uint16_t oqs_all_tls13_server_groups[] = {
     0x2F64, /* OQS oqkd_frodo1344aes hybrid */
     0x0265, /* oqkd_frodo1344shake */
     0x2F65, /* OQS oqkd_frodo1344shake hybrid */
+    0x0270, /* oqkd_kyber512 */
+    0x2F70, /* OQS oqkd_kyber512 hybrid */
+    0x0271, /* oqkd_kyber768 */
+    0x2F71, /* OQS oqkd_kyber768 hybrid */
+    0x0272, /* oqkd_kyber1024 */
+    0x2F72, /* OQS oqkd_kyber1024 hybrid */
+    0x0273, /* oqkd_kyber90s512 */
+    0x2F73, /* OQS oqkd_kyber90s512 hybrid */
+    0x0274, /* oqkd_kyber90s768 */
+    0x2F74, /* OQS oqkd_kyber90s768 hybrid */
+    0x0275, /* oqkd_kyber90s1024 */
+    0x2F75, /* OQS oqkd_kyber90s1024 hybrid */
 ///// OQS_TEMPLATE_FRAGMENT_ALL_OQS_CURVEIDS_END
 };
 
