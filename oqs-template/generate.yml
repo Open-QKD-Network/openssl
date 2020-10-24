@@ -331,6 +331,24 @@ kems:
     nid_hybrid: "0x2F79"
     oqs_alg: "OQS_KEM_alg_ntru_hrss701"
     bit_security: 192
+  -
+    name_group: "oqkd_lightsaber"
+    nid: "0x027a"
+    nid_hybrid: "0x2F7a"
+    oqs_alg: "OQS_KEM_alg_saber_lightsaber"
+    bit_security: 128
+  -
+    name_group: "oqkd_saber"
+    nid: "0x027b"
+    nid_hybrid: "0x2F7b"
+    oqs_alg: "OQS_KEM_alg_saber_saber"
+    bit_security: 192
+  -
+    name_group: "oqkd_firesaber"
+    nid: "0x027c"
+    nid_hybrid: "0x2F7c"
+    oqs_alg: "OQS_KEM_alg_saber_firesaber"
+    bit_security: 256
 kem_nid_end: "0x0250"
 kem_nid_hybrid_end: "0x2FFF"
 # need to edit ssl_local.h macros IS_OQS_KEM_CURVEID and IS_OQS_KEM_HYBRID_CURVEID with the above _end values

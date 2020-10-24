@@ -173,6 +173,9 @@ int oqssl_kem_nids_list[] = {
         NID_oqkd_ntru_hps2048677,
         NID_oqkd_ntru_hps4096821,
         NID_oqkd_ntru_hrss701,
+        NID_oqkd_lightsaber,
+        NID_oqkd_saber,
+        NID_oqkd_firesaber,
 /////// OQS_TEMPLATE_FRAGMENT_LIST_KNOWN_KEM_NIDS_END
 };
 
@@ -422,6 +425,15 @@ char* get_oqs_alg_name(int openssl_nid)
     case NID_oqkd_ntru_hrss701:
     case NID_p384_oqkd_ntru_hrss701:
       return OQS_KEM_alg_ntru_hrss701;
+    case NID_oqkd_lightsaber:
+    case NID_p256_oqkd_lightsaber:
+      return OQS_KEM_alg_saber_lightsaber;
+    case NID_oqkd_saber:
+    case NID_p384_oqkd_saber:
+      return OQS_KEM_alg_saber_saber;
+    case NID_oqkd_firesaber:
+    case NID_p521_oqkd_firesaber:
+      return OQS_KEM_alg_saber_firesaber;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_ALG_END
     default:
       return NULL;

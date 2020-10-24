@@ -1789,6 +1789,12 @@ dstu4145le 2 9 : uacurve9 : DSTU curve 9
  : p521_oqkd_ntru_hps4096821 : p521_oqkd_ntru_hps4096821
  : oqkd_ntru_hrss701 : oqkd_ntru_hrss701
  : p384_oqkd_ntru_hrss701 : p384_oqkd_ntru_hrss701
+ : oqkd_lightsaber : oqkd_lightsaber
+ : p256_oqkd_lightsaber : p256_oqkd_lightsaber
+ : oqkd_saber : oqkd_saber
+ : p384_oqkd_saber : p384_oqkd_saber
+ : oqkd_firesaber : oqkd_firesaber
+ : p521_oqkd_firesaber : p521_oqkd_firesaber
 ##### OQS_TEMPLATE_FRAGMENT_LIST_KEMS_END
 
 ##### OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_OIDS_START

@@ -237,6 +237,9 @@ static const TLS_GROUP_INFO oqs_nid_list[] = {
     {NID_oqkd_ntru_hps2048677, 192, TLS_CURVE_CUSTOM}, /* oqkd_ntru_hps2048677 (0x0277) */
     {NID_oqkd_ntru_hps4096821, 256, TLS_CURVE_CUSTOM}, /* oqkd_ntru_hps4096821 (0x0278) */
     {NID_oqkd_ntru_hrss701, 192, TLS_CURVE_CUSTOM}, /* oqkd_ntru_hrss701 (0x0279) */
+    {NID_oqkd_lightsaber, 128, TLS_CURVE_CUSTOM}, /* oqkd_lightsaber (0x027a) */
+    {NID_oqkd_saber, 192, TLS_CURVE_CUSTOM}, /* oqkd_saber (0x027b) */
+    {NID_oqkd_firesaber, 256, TLS_CURVE_CUSTOM}, /* oqkd_firesaber (0x027c) */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_NID_LIST_END
 };
     /* Hybrid OQS groups. Security level is classical. */
@@ -298,6 +301,9 @@ static const TLS_GROUP_INFO oqs_hybrid_nid_list[] = {
  {NID_p384_oqkd_ntru_hps2048677, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_ntru_hps2048677 hybrid (0x0277) */
  {NID_p521_oqkd_ntru_hps4096821, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_ntru_hps4096821 hybrid (0x0278) */
  {NID_p384_oqkd_ntru_hrss701, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_ntru_hrss701 hybrid (0x0279) */
+ {NID_p256_oqkd_lightsaber, 128, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_lightsaber hybrid (0x027a) */
+ {NID_p384_oqkd_saber, 192, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_saber hybrid (0x027b) */
+ {NID_p521_oqkd_firesaber, 256, TLS_CURVE_CUSTOM}, /* p256/384/521 + oqkd_firesaber hybrid (0x027c) */
 ///// OQS_TEMPLATE_FRAGMENT_OQS_NID_LIST_HYBRID_END
 };
 
@@ -335,6 +341,7 @@ static const uint16_t eccurves_default[] = {
     0x2F70, /* OQS oqkd_kyber512 hybrid */
     0x2F73, /* OQS oqkd_kyber90s512 hybrid */
     0x2F76, /* OQS oqkd_ntru_hps2048509 hybrid */
+    0x2F7a, /* OQS oqkd_lightsaber hybrid */
 ///// OQS_TEMPLATE_FRAGMENT_ECCURVES_DEFAULT_HYBRID_END
 };
 
@@ -462,6 +469,12 @@ static const uint16_t oqs_all_tls13_server_groups[] = {
     0x2F78, /* OQS oqkd_ntru_hps4096821 hybrid */
     0x0279, /* oqkd_ntru_hrss701 */
     0x2F79, /* OQS oqkd_ntru_hrss701 hybrid */
+    0x027a, /* oqkd_lightsaber */
+    0x2F7a, /* OQS oqkd_lightsaber hybrid */
+    0x027b, /* oqkd_saber */
+    0x2F7b, /* OQS oqkd_saber hybrid */
+    0x027c, /* oqkd_firesaber */
+    0x2F7c, /* OQS oqkd_firesaber hybrid */
 ///// OQS_TEMPLATE_FRAGMENT_ALL_OQS_CURVEIDS_END
 };
 

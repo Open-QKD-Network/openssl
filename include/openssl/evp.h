@@ -103,8 +103,8 @@
 # define EVP_PKEY_P256_SPHINCSHARAKA128FROBUST NID_p256_sphincsharaka128frobust
 # define EVP_PKEY_RSA3072_SPHINCSHARAKA128FROBUST NID_rsa3072_sphincsharaka128frobust
 #define OQS_OPENSSL_SIG_algs_length 38
-#define OQS_OPENSSL_KEM_algs_length 55
-#define IS_OQS_OPENSSL_KEM_NID(a) ((a >= NID_oqs_kem_default) && (a <= NID_p384_oqkd_ntru_hrss701))
+#define OQS_OPENSSL_KEM_algs_length 58
+#define IS_OQS_OPENSSL_KEM_NID(a) ((a >= NID_oqs_kem_default) && (a <= NID_p521_oqkd_firesaber))
 #define IS_OQS_OPENSSL_SIG_NID(a) ((a >= NID_oqs_sig_default) && (a <= NID_rsa3072_sphincsharaka128frobust))
 /////// OQS_TEMPLATE_FRAGMENT_DEFINE_EVP_PKEYS_END
 const char *OQSKEM_options(void);

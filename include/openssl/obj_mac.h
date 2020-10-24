@@ -5645,6 +5645,30 @@
 #define LN_p384_oqkd_ntru_hrss701               "p384_oqkd_ntru_hrss701"
 #define NID_p384_oqkd_ntru_hrss701              1344
 
+#define SN_oqkd_lightsaber              "oqkd_lightsaber"
+#define LN_oqkd_lightsaber              "oqkd_lightsaber"
+#define NID_oqkd_lightsaber             1345
+
+#define SN_p256_oqkd_lightsaber         "p256_oqkd_lightsaber"
+#define LN_p256_oqkd_lightsaber         "p256_oqkd_lightsaber"
+#define NID_p256_oqkd_lightsaber                1346
+
+#define SN_oqkd_saber           "oqkd_saber"
+#define LN_oqkd_saber           "oqkd_saber"
+#define NID_oqkd_saber          1347
+
+#define SN_p384_oqkd_saber              "p384_oqkd_saber"
+#define LN_p384_oqkd_saber              "p384_oqkd_saber"
+#define NID_p384_oqkd_saber             1348
+
+#define SN_oqkd_firesaber               "oqkd_firesaber"
+#define LN_oqkd_firesaber               "oqkd_firesaber"
+#define NID_oqkd_firesaber              1349
+
+#define SN_p521_oqkd_firesaber          "p521_oqkd_firesaber"
+#define LN_p521_oqkd_firesaber          "p521_oqkd_firesaber"
+#define NID_p521_oqkd_firesaber         1350
+
 #define SN_oqs_sig_default              "oqs_sig_default"
 #define LN_oqs_sig_default              "oqs_sig_default"
 #define NID_oqs_sig_default             1195

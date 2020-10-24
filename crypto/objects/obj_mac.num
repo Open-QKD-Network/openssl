@@ -1342,3 +1342,9 @@ oqkd_ntru_hps4096821		1341
 p521_oqkd_ntru_hps4096821		1342
 oqkd_ntru_hrss701		1343
 p384_oqkd_ntru_hrss701		1344
+oqkd_lightsaber		1345
+p256_oqkd_lightsaber		1346
+oqkd_saber		1347
+p384_oqkd_saber		1348
+oqkd_firesaber		1349
+p521_oqkd_firesaber		1350
