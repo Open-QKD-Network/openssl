@@ -5613,6 +5613,38 @@
 #define LN_p521_oqkd_kyber90s1024               "p521_oqkd_kyber90s1024"
 #define NID_p521_oqkd_kyber90s1024              1336
 
+#define SN_oqkd_ntru_hps2048509         "oqkd_ntru_hps2048509"
+#define LN_oqkd_ntru_hps2048509         "oqkd_ntru_hps2048509"
+#define NID_oqkd_ntru_hps2048509                1337
+
+#define SN_p256_oqkd_ntru_hps2048509            "p256_oqkd_ntru_hps2048509"
+#define LN_p256_oqkd_ntru_hps2048509            "p256_oqkd_ntru_hps2048509"
+#define NID_p256_oqkd_ntru_hps2048509           1338
+
+#define SN_oqkd_ntru_hps2048677         "oqkd_ntru_hps2048677"
+#define LN_oqkd_ntru_hps2048677         "oqkd_ntru_hps2048677"
+#define NID_oqkd_ntru_hps2048677                1339
+
+#define SN_p384_oqkd_ntru_hps2048677            "p384_oqkd_ntru_hps2048677"
+#define LN_p384_oqkd_ntru_hps2048677            "p384_oqkd_ntru_hps2048677"
+#define NID_p384_oqkd_ntru_hps2048677           1340
+
+#define SN_oqkd_ntru_hps4096821         "oqkd_ntru_hps4096821"
+#define LN_oqkd_ntru_hps4096821         "oqkd_ntru_hps4096821"
+#define NID_oqkd_ntru_hps4096821                1341
+
+#define SN_p521_oqkd_ntru_hps4096821            "p521_oqkd_ntru_hps4096821"
+#define LN_p521_oqkd_ntru_hps4096821            "p521_oqkd_ntru_hps4096821"
+#define NID_p521_oqkd_ntru_hps4096821           1342
+
+#define SN_oqkd_ntru_hrss701            "oqkd_ntru_hrss701"
+#define LN_oqkd_ntru_hrss701            "oqkd_ntru_hrss701"
+#define NID_oqkd_ntru_hrss701           1343
+
+#define SN_p384_oqkd_ntru_hrss701               "p384_oqkd_ntru_hrss701"
+#define LN_p384_oqkd_ntru_hrss701               "p384_oqkd_ntru_hrss701"
+#define NID_p384_oqkd_ntru_hrss701              1344
+
 #define SN_oqs_sig_default              "oqs_sig_default"
 #define LN_oqs_sig_default              "oqs_sig_default"
 #define NID_oqs_sig_default             1195

@@ -1116,7 +1116,7 @@ static const unsigned char so[8044] = {
     0x2B,0xCE,0x0F,0x06,0x01,0x03,                 /* [ 8037] OBJ_rsa3072_sphincsharaka128frobust */
 };
 
-#define NUM_NID 1337
+#define NUM_NID 1345
 static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"UNDEF", "undefined", NID_undef},
     {"rsadsi", "RSA Data Security, Inc.", NID_rsadsi, 6, &so[0]},
@@ -2455,9 +2455,17 @@ static const ASN1_OBJECT nid_objs[NUM_NID] = {
     {"p384_oqkd_kyber90s768", "p384_oqkd_kyber90s768", NID_p384_oqkd_kyber90s768},
     {"oqkd_kyber90s1024", "oqkd_kyber90s1024", NID_oqkd_kyber90s1024},
     {"p521_oqkd_kyber90s1024", "p521_oqkd_kyber90s1024", NID_p521_oqkd_kyber90s1024},
+    {"oqkd_ntru_hps2048509", "oqkd_ntru_hps2048509", NID_oqkd_ntru_hps2048509},
+    {"p256_oqkd_ntru_hps2048509", "p256_oqkd_ntru_hps2048509", NID_p256_oqkd_ntru_hps2048509},
+    {"oqkd_ntru_hps2048677", "oqkd_ntru_hps2048677", NID_oqkd_ntru_hps2048677},
+    {"p384_oqkd_ntru_hps2048677", "p384_oqkd_ntru_hps2048677", NID_p384_oqkd_ntru_hps2048677},
+    {"oqkd_ntru_hps4096821", "oqkd_ntru_hps4096821", NID_oqkd_ntru_hps4096821},
+    {"p521_oqkd_ntru_hps4096821", "p521_oqkd_ntru_hps4096821", NID_p521_oqkd_ntru_hps4096821},
+    {"oqkd_ntru_hrss701", "oqkd_ntru_hrss701", NID_oqkd_ntru_hrss701},
+    {"p384_oqkd_ntru_hrss701", "p384_oqkd_ntru_hrss701", NID_p384_oqkd_ntru_hrss701},
 };
 
-#define NUM_SN 1328
+#define NUM_SN 1336
 static const unsigned int sn_objs[NUM_SN] = {
      364,    /* "AD_DVCS" */
      419,    /* "AES-128-CBC" */
@@ -3372,6 +3380,10 @@ static const unsigned int sn_objs[NUM_SN] = {
     1335,    /* "oqkd_kyber90s1024" */
     1331,    /* "oqkd_kyber90s512" */
     1333,    /* "oqkd_kyber90s768" */
+    1337,    /* "oqkd_ntru_hps2048509" */
+    1339,    /* "oqkd_ntru_hps2048677" */
+    1341,    /* "oqkd_ntru_hps4096821" */
+    1343,    /* "oqkd_ntru_hrss701" */
     1233,    /* "oqs_kem_default" */
     1195,    /* "oqs_sig_default" */
     1089,    /* "organizationIdentifier" */
@@ -3398,6 +3410,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1316,    /* "p256_oqkd_frodo640shake" */
     1326,    /* "p256_oqkd_kyber512" */
     1332,    /* "p256_oqkd_kyber90s512" */
+    1338,    /* "p256_oqkd_ntru_hps2048509" */
     1234,    /* "p256_oqs_kem_default" */
     1196,    /* "p256_oqs_sig_default" */
     1218,    /* "p256_picnic3l1" */
@@ -3424,6 +3437,8 @@ static const unsigned int sn_objs[NUM_SN] = {
     1320,    /* "p384_oqkd_frodo976shake" */
     1328,    /* "p384_oqkd_kyber768" */
     1334,    /* "p384_oqkd_kyber90s768" */
+    1340,    /* "p384_oqkd_ntru_hps2048677" */
+    1344,    /* "p384_oqkd_ntru_hrss701" */
     1224,    /* "p384_qteslapiii" */
     1276,    /* "p384_saber" */
     1284,    /* "p384_sidhp610" */
@@ -3440,6 +3455,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1324,    /* "p521_oqkd_frodo1344shake" */
     1330,    /* "p521_oqkd_kyber1024" */
     1336,    /* "p521_oqkd_kyber90s1024" */
+    1342,    /* "p521_oqkd_ntru_hps4096821" */
     1306,    /* "p521_papabear" */
     1312,    /* "p521_papabearephem" */
     1229,    /* "p521_rainbowVcclassic" */
@@ -3789,7 +3805,7 @@ static const unsigned int sn_objs[NUM_SN] = {
     1093,    /* "x509ExtAdmission" */
 };
 
-#define NUM_LN 1328
+#define NUM_LN 1336
 static const unsigned int ln_objs[NUM_LN] = {
      363,    /* "AD Time Stamping" */
      405,    /* "ANSI X9.62" */
@@ -4674,6 +4690,10 @@ static const unsigned int ln_objs[NUM_LN] = {
     1335,    /* "oqkd_kyber90s1024" */
     1331,    /* "oqkd_kyber90s512" */
     1333,    /* "oqkd_kyber90s768" */
+    1337,    /* "oqkd_ntru_hps2048509" */
+    1339,    /* "oqkd_ntru_hps2048677" */
+    1341,    /* "oqkd_ntru_hps4096821" */
+    1343,    /* "oqkd_ntru_hrss701" */
     1233,    /* "oqs_kem_default" */
     1195,    /* "oqs_sig_default" */
      379,    /* "org" */
@@ -4703,6 +4723,7 @@ static const unsigned int ln_objs[NUM_LN] = {
     1316,    /* "p256_oqkd_frodo640shake" */
     1326,    /* "p256_oqkd_kyber512" */
     1332,    /* "p256_oqkd_kyber90s512" */
+    1338,    /* "p256_oqkd_ntru_hps2048509" */
     1234,    /* "p256_oqs_kem_default" */
     1196,    /* "p256_oqs_sig_default" */
     1218,    /* "p256_picnic3l1" */
@@ -4729,6 +4750,8 @@ static const unsigned int ln_objs[NUM_LN] = {
     1320,    /* "p384_oqkd_frodo976shake" */
     1328,    /* "p384_oqkd_kyber768" */
     1334,    /* "p384_oqkd_kyber90s768" */
+    1340,    /* "p384_oqkd_ntru_hps2048677" */
+    1344,    /* "p384_oqkd_ntru_hrss701" */
     1224,    /* "p384_qteslapiii" */
     1276,    /* "p384_saber" */
     1284,    /* "p384_sidhp610" */
@@ -4745,6 +4768,7 @@ static const unsigned int ln_objs[NUM_LN] = {
     1324,    /* "p521_oqkd_frodo1344shake" */
     1330,    /* "p521_oqkd_kyber1024" */
     1336,    /* "p521_oqkd_kyber90s1024" */
+    1342,    /* "p521_oqkd_ntru_hps4096821" */
     1306,    /* "p521_papabear" */
     1312,    /* "p521_papabearephem" */
     1229,    /* "p521_rainbowVcclassic" */

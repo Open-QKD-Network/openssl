@@ -528,6 +528,10 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
   case 0x0273: return "oqkd_kyber90s512";
   case 0x0274: return "oqkd_kyber90s768";
   case 0x0275: return "oqkd_kyber90s1024";
+  case 0x0276: return "oqkd_ntru_hps2048509";
+  case 0x0277: return "oqkd_ntru_hps2048677";
+  case 0x0278: return "oqkd_ntru_hps4096821";
+  case 0x0279: return "oqkd_ntru_hrss701";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_END
   case 0x2FFF: return "p256_oqs_kem_default hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_START
@@ -582,6 +586,10 @@ static const char* OQS_CURVE_ID_NAME_STR(int id) {
    case 0x2F73: return "p256_oqkd_kyber90s512 hybrid";
    case 0x2F74: return "p384_oqkd_kyber90s768 hybrid";
    case 0x2F75: return "p521_oqkd_kyber90s1024 hybrid";
+   case 0x2F76: return "p256_oqkd_ntru_hps2048509 hybrid";
+   case 0x2F77: return "p384_oqkd_ntru_hps2048677 hybrid";
+   case 0x2F78: return "p521_oqkd_ntru_hps4096821 hybrid";
+   case 0x2F79: return "p384_oqkd_ntru_hrss701 hybrid";
   ///// OQS_TEMPLATE_FRAGMENT_OQS_CURVE_ID_NAME_STR_HYBRID_END
   default: return "";
   }

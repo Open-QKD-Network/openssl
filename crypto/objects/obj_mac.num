@@ -1334,3 +1334,11 @@ oqkd_kyber90s768		1333
 p384_oqkd_kyber90s768		1334
 oqkd_kyber90s1024		1335
 p521_oqkd_kyber90s1024		1336
+oqkd_ntru_hps2048509		1337
+p256_oqkd_ntru_hps2048509		1338
+oqkd_ntru_hps2048677		1339
+p384_oqkd_ntru_hps2048677		1340
+oqkd_ntru_hps4096821		1341
+p521_oqkd_ntru_hps4096821		1342
+oqkd_ntru_hrss701		1343
+p384_oqkd_ntru_hrss701		1344

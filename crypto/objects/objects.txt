@@ -1781,6 +1781,14 @@ dstu4145le 2 9 : uacurve9 : DSTU curve 9
  : p384_oqkd_kyber90s768 : p384_oqkd_kyber90s768
  : oqkd_kyber90s1024 : oqkd_kyber90s1024
  : p521_oqkd_kyber90s1024 : p521_oqkd_kyber90s1024
+ : oqkd_ntru_hps2048509 : oqkd_ntru_hps2048509
+ : p256_oqkd_ntru_hps2048509 : p256_oqkd_ntru_hps2048509
+ : oqkd_ntru_hps2048677 : oqkd_ntru_hps2048677
+ : p384_oqkd_ntru_hps2048677 : p384_oqkd_ntru_hps2048677
+ : oqkd_ntru_hps4096821 : oqkd_ntru_hps4096821
+ : p521_oqkd_ntru_hps4096821 : p521_oqkd_ntru_hps4096821
+ : oqkd_ntru_hrss701 : oqkd_ntru_hrss701
+ : p384_oqkd_ntru_hrss701 : p384_oqkd_ntru_hrss701
 ##### OQS_TEMPLATE_FRAGMENT_LIST_KEMS_END
 
 ##### OQS_TEMPLATE_FRAGMENT_ASSIGN_SIG_OIDS_START
