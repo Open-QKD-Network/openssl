@@ -1,0 +1,59 @@
+mkdir qkd-test
+cd qkd-test
+git clone https://github.com/Open-QKD-Network/openssl.git
+cd openssl
+git checkout openqkd
+cd ../
+git clone https://github.com/Open-QKD-Network/liboqs.git
+cd liboqs
+git checkout openqkd
+mkdir build
+cd build
+cmake -GNinja -DCMAKE_INSTALL_PREFIX=../../openssl/oqs ..
+ninja
+ninja install
+cd ../../openssl
+# Build openssl with debug (you can use gdb to debug openssl)
+./Configure no-shared linux-x86_64 -lm no-asm -g3 -O0 -fno-omit-frame-pointer -fno-inline-functions
+# Build openssl without debug
+./Configure no-shared linux-x86_64 -lm
+make
+
+# Start openqkd network
+# checkout the code from disable-spring-auth 
+# and disable authentication by adding false in last line of kms.conf
+
+more ~/.qkd/kms.conf 
+http://localhost:9992/uaa/oauth/token
+http://localhost:8095/api/newkey
+http://localhost:8095/api/getkey
+B
+false
+
+#Assume server IP address is 192.168.2.235
+#On server side
+./apps/openssl s_server -cert ./certs/ec_srv.crt -key ./certs/ec_srv.key -tls1_3 -accept 4443
+# On client side
+./apps/openssl s_client -groups p384_oqkd_saber -CAfile ./certs/ecdsa_CA.crt --connect 192.168.2.235:4443
+
+# NIST post-quantum cryptography algorithms round 3 finals
+# https://csrc.nist.gov/Projects/post-quantum-cryptography/round-3-submissions
+
+# saber set
+p256_oqkd_lightsaber
+p384_oqkd_saber
+p521_oqkd_firesaber
+
+# ntru set
+p256_oqkd_ntru_hps2048509
+p384_oqkd_ntru_hps2048677
+p521_oqkd_ntru_hps4096821
+p384_oqkd_ntru_hrss701
+
+# kyber set
+p256_oqkd_kyber512
+p384_oqkd_kyber768
+p521_oqkd_kyber1024
+p256_oqkd_kyber90s512
+p384_oqkd_kyber90s768
+p521_oqkd_kyber90s1024

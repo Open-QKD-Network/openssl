@@ -1,0 +1,151 @@
+# Generate private key for CA
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ apps/openssl ecparam -name secp384r1
+-----BEGIN EC PARAMETERS-----
+BgUrgQQAIg==
+-----END EC PARAMETERS-----
+
+apps/openssl req -x509 -new -newkey ec:<(apps/openssl ecparam -name secp384r1) -keyout ecdsa_CA.key -out ecdsa_CA.crt -nodes -subj "/CN=oqstest" -days 365 -config apps/openssl.cnf
+Generating an EC private key
+writing new private key to 'ecdsa_CA.key'
+-----
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ more ecdsa_CA.key 
+-----BEGIN PRIVATE KEY-----
+MIG2AgEAMBAGByqGSM49AgEGBSuBBAAiBIGeMIGbAgEBBDBxwydfJF0oWROmen0l
+lllyptKS1RSzfQit0zgwj/9E/nnienDrWmeXLsemoyCM5ZuhZANiAARa805bMWt4
+TB0cBXkjFhCTX5nrL+SIAoQI4fWpaCsQQfzcaONjIRHqTNFaUxeY+KZte4aCQFsK
+3L9UdH+kuoWD5F0wL0cjklsvO1UhFAbZSM9jN5EvZhR4D4Q73fIxuUA=
+-----END PRIVATE KEY-----
+ 
+# Generate CA certificate
+apps/openssl req -x509 -new -newkey ec:<(apps/openssl ecparam -name secp384r1) -keyout ecdsa_CA.key -out ecdsa_CA.crt -nodes -subj "/CN=oqstest" -days 365 -config apps/openssl.cnf
+
+# Check CA certificate
+apps/openssl x509 -in ecdsa_CA.crt -text -noout
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            3c:62:3a:f4:51:e2:45:95:a5:bb:70:1f:5c:dc:d2:e5:70:ed:0a:f9
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN = oqstest
+        Validity
+            Not Before: Jul  3 13:37:08 2020 GMT
+            Not After : Jul  3 13:37:08 2021 GMT
+        Subject: CN = oqstest
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub:
+                    04:5a:f3:4e:5b:31:6b:78:4c:1d:1c:05:79:23:16:
+                    10:93:5f:99:eb:2f:e4:88:02:84:08:e1:f5:a9:68:
+                    2b:10:41:fc:dc:68:e3:63:21:11:ea:4c:d1:5a:53:
+                    17:98:f8:a6:6d:7b:86:82:40:5b:0a:dc:bf:54:74:
+                    7f:a4:ba:85:83:e4:5d:30:2f:47:23:92:5b:2f:3b:
+                    55:21:14:06:d9:48:cf:63:37:91:2f:66:14:78:0f:
+                    84:3b:dd:f2:31:b9:40
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                3A:F5:40:62:F8:79:B9:4F:3E:8B:63:B7:55:43:2B:92:18:18:27:69
+            X509v3 Authority Key Identifier: 
+                keyid:3A:F5:40:62:F8:79:B9:4F:3E:8B:63:B7:55:43:2B:92:18:18:27:69
+
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+    Signature Algorithm: ecdsa-with-SHA256
+         30:65:02:31:00:e8:0d:81:c1:9b:43:9b:27:90:06:37:30:4a:
+         e0:1a:b7:14:ed:5e:33:97:e3:ae:0b:81:84:15:e0:d9:b7:29:
+         c7:ba:f0:85:b3:db:15:d7:77:15:4b:20:ee:92:aa:a0:75:02:
+         30:29:cf:98:5c:f2:f7:68:1a:c7:d4:86:21:b1:71:35:b7:6f:
+         53:bb:45:a2:a2:d4:dd:60:71:f9:60:c8:4f:88:77:ce:07:d9:
+         2e:a9:a3:c3:01:81:84:39:7b:3c:4e:6e:8a
+
+# Generate private key params for server certificate
+apps/openssl genpkey -genparam -algorithm EC -out ecp.pem -pkeyopt ec_paramgen_curve:secp384r1 -pkeyopt ec_param_enc:named_curve
+
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ more ecp.pem
+-----BEGIN EC PARAMETERS-----
+BgUrgQQAIg==
+-----END EC PARAMETERS-----
+
+# generate private key for server certificate
+openssl genpkey -paramfile ecp.pem -out ec_srv.key
+
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ more ec_srv.key 
+-----BEGIN PRIVATE KEY-----
+MIG2AgEAMBAGByqGSM49AgEGBSuBBAAiBIGeMIGbAgEBBDAARCzhylLP1J/8yOf3
+kluOMproxd3sHrqOAxIVEkhAMMyDt3pmD0ogrWbtUIKepG2hZANiAASknBnuBHvs
+yWiVCTjSSZ5rPRezwChFwYcHHBIbbCX8z7p2K/JNmYxeFcm7ze7KuYiNq4z14Msm
+L8toE86MklYY+FPwhmkKhNIN6UBdqmxQNPiv3hFLO8M/UucVOS93yMI=
+-----END PRIVATE KEY-----
+
+# generate server certificate sign request based on private key
+apps/openssl req -out ec_srv.csr -key ec_srv.key -new -nodes -subj "/CN=oqstest server" -config apps/openssl.cnf
+
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ more ec_srv.csr 
+-----BEGIN CERTIFICATE REQUEST-----
+MIIBEDCBmAIBADAZMRcwFQYDVQQDDA5vcXN0ZXN0IHNlcnZlcjB2MBAGByqGSM49
+AgEGBSuBBAAiA2IABKScGe4Ee+zJaJUJONJJnms9F7PAKEXBhwccEhtsJfzPunYr
+8k2ZjF4VybvN7sq5iI2rjPXgyyYvy2gTzoySVhj4U/CGaQqE0g3pQF2qbFA0+K/e
+EUs7wz9S5xU5L3fIwqAAMAoGCCqGSM49BAMCA2cAMGQCMCHTGqGXDEiPevRn5GGt
+9TR6X568ecWXcwNb9/rW0IpFHGXt4quZuQ6XWr5m1D1sTgIwaiCSJnylRvKiakaM
+qI1Tve32jjhDYRq4yGshzPSSCfKE62UFEDB0gs7cpMbOIf5y
+-----END CERTIFICATE REQUEST-----
+
+# generate server certificate
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ apps/openssl x509 -req -in ec_srv.csr  -out ec_srv.crt -CA ecdsa_CA.crt -CAkey ecdsa_CA.key -CAcreateserial -days 365
+Signature ok
+subject=CN = oqstest server
+Getting CA Private Key
+
+# check server certificate
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ apps/openssl x509 -in ec_srv.crt -text -noout
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number:
+            41:8b:ab:3b:93:da:34:82:e5:6e:5e:51:c3:72:1a:2c:d8:d8:41:df
+        Signature Algorithm: ecdsa-with-SHA256
+        Issuer: CN = oqstest
+        Validity
+            Not Before: Jul  3 14:33:07 2020 GMT
+            Not After : Jul  3 14:33:07 2021 GMT
+        Subject: CN = oqstest server
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub:
+                    04:a4:9c:19:ee:04:7b:ec:c9:68:95:09:38:d2:49:
+                    9e:6b:3d:17:b3:c0:28:45:c1:87:07:1c:12:1b:6c:
+                    25:fc:cf:ba:76:2b:f2:4d:99:8c:5e:15:c9:bb:cd:
+                    ee:ca:b9:88:8d:ab:8c:f5:e0:cb:26:2f:cb:68:13:
+                    ce:8c:92:56:18:f8:53:f0:86:69:0a:84:d2:0d:e9:
+                    40:5d:aa:6c:50:34:f8:af:de:11:4b:3b:c3:3f:52:
+                    e7:15:39:2f:77:c8:c2
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+    Signature Algorithm: ecdsa-with-SHA256
+         30:64:02:30:1e:8c:e9:8e:50:33:a6:f7:f5:de:81:47:81:03:
+         3f:fd:f1:64:7c:23:77:51:43:7e:0d:8e:73:8d:f4:6b:10:f7:
+         14:53:0d:f0:ba:6f:44:d6:36:80:03:c7:a7:d5:61:70:02:30:
+         64:61:9d:61:13:18:25:69:02:36:f6:2c:cd:9a:8c:23:7d:b3:
+         28:2c:20:e6:40:f4:7c:9a:4d:ab:77:12:fa:26:9b:c6:f2:59:
+         aa:6f:22:a4:51:7f:e0:d2:6d:5d:a2:3f
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ 
+
+# Run server application
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ apps/openssl s_server -cert ec_srv.crt -key ec_srv.key -tls1_3
+
+# Run client application
+apps/openssl s_client -groups ntru_hps2048509 -CAfile ecdsa_CA.crt 
+
+# Files
+1. CA private key/certificate
+
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ ls *CA*
+ecdsa_CA.crt  ecdsa_CA.key  ecdsa_CA.srl
+
+2. Server private key/certificate request/certificate
+b43s@ASUS-B43S:~/openquantumsafe/openssl$ ls *srv*
+ec_srv.crt  ec_srv.csr  ec_srv.key
