@@ -621,6 +621,13 @@ install_dev: install_runtime_libs
 		cp $$i "$(DESTDIR)$(INSTALLTOP)/include/oqs/$$fn"; \
 		chmod 644 "$(DESTDIR)$(INSTALLTOP)/include/oqs/$$fn"; \
 	done
+	@$(PERL) $(SRCDIR)/util/mkdir-p.pl "$(DESTDIR)$(INSTALLTOP)/include/openqkd"
+	@set -e; for i in $(SRCDIR)/openqkd/include/*.h; do \
+		fn=`basename $$i`; \
+		$(ECHO) "install $$i -> $(DESTDIR)$(INSTALLTOP)/include/openqkd/$$fn"; \
+		cp $$i "$(DESTDIR)$(INSTALLTOP)/include/openqkd/$$fn"; \
+		chmod 644 "$(DESTDIR)$(INSTALLTOP)/include/openqkd/$$fn"; \
+	done
 	@$(PERL) $(SRCDIR)/util/mkdir-p.pl "$(DESTDIR)$(libdir)"
 	@set -e; for l in $(INSTALL_LIBS); do \
 		fn=`basename $$l`; \
@@ -790,6 +797,9 @@ ifneq (,$(wildcard oqs/lib/liboqs.so.0*))
 		install oqs/lib/$$fn $(DESTDIR)$(libdir); \
 		cd $(DESTDIR)$(libdir) && ln -sf $$fn liboqs.so && ln -sf $$fn liboqs.so.0 && cd -; \
 	done
+endif
+ifneq (,$(wildcard openqkd/lib/libopenqkd.a))
+	@install openqkd/lib/libopenqkd.a $(DESTDIR)$(libdir)
 endif
 
 
