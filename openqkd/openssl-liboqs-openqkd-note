@@ -17,6 +17,8 @@ cd ../../openssl
 ./Configure no-shared linux-x86_64 -lm no-asm -g3 -O0 -fno-omit-frame-pointer -fno-inline-functions
 # Build openssl without debug
 ./Configure no-shared linux-x86_64 -lm
+#Build openssl with shared library
+./Configure shared linux-x86_64 --debug --prefix=/home/b43s/qkd-checkin/openssl-install/openssl --openssldir=/home/b43s/qkd-checkin/openssl-install/ssl -lm
 make
 
 # Start openqkd network
